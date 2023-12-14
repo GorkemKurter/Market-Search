@@ -1,0 +1,398 @@
+http://zhmanproxy.zh.corp:9001/pacmanisa : proxy
+
+Set-ExecutionPolicy Bypass -Scope Process -Force :İzinleri bypass etme
+
+.venv\Scripts\activate : "Virtual environment" aktifleştirmesi
+
+pip install -i https://mirrors.aliyun.com/pypi/simple/ numpy : paket yükleme
+
+'''panel_type = functions.custom_slice(selected_vestel_model,products_df[products_df["PANEL TİPİ"]])
+print(panel_type)
+x = products_df[products_df["PANEL TİPİ"].str.contains(selected_vestel_model)]
+selected_product = products_df[products_df["PANEL TİPİ"] == x]'''
+
+
+'''panel_type = functions.custom_slice(selected_vestel_model,products_df[products_df["PANEL TİPİ"])
+print(panel_type)'''
+
+
+'''print(selected_brand_name)
+print(selected_vestel_model)
+print(selected_customer_model)
+print(selected_energy_value)
+print(selected_CH)
+print(selected_panel)
+print(selected_door)
+print(selected_LT)
+print(selected_RPM)'''
+
+###################################
+DOC_Archive:
+
+import pandas as pd
+from sqlalchemy import create_engine
+import sqlite3
+
+
+Doc_main_text = "here authorize Ürünler!$O$2; sell VESTEL product, with CE markings and declare that the products exported below;"
+Doc_decleration_text = "Type of product: Electronically Controlled Automatic Ürünler!$H$2"
+
+Doc_Washing_Machine_Standard = '''
+Low voltage directive 2014 / 35 / EU
+       EN 60335-1:2012 +A11:2014 +AC:2014 +A13:2017 +A1:2019 +A14:2019 +A2:2019 +A15:2021
+       EN 60335-2-7:2010 +A1:2013 +A11:2013 + A2:2019
+       EN 61770:2009 +A11:2018 +A1:2019
+       EN 62233:2008 (incl. Corr.1:2008)
+EMC directive 2014 / 30 / EU 
+       EN 55014-1:2021
+       EN 55014-2:2021
+       EN 61000-3-2:2019 +A1:2021
+       EN 61000-3-3:2013+A1:2019+A2:2021
+       EN 61000-4-2:2009
+       EN 61000-4-3:2006 +A1:2008 +A2:2010
+       EN 61000-4-4:2012
+       EN 61000-4-5:2014 +A1:2017
+       EN 61000-4-6:2014
+       EN 61000-4-11:2020
+Commission Delegated Directive (EU) 2015/863 amending Annex II to Rohs Directive 2011/65/EU
+
+COMMISSION DELEGATED REGULATION (EU) 2019/2014 of 11 March 2019 supplementing Regulation (EU) 2017/1369 of the European Parliament and of the Council with regard to energy labelling of household washing machines and household washer-dryers and repealing Commission Delegated Regulation (EU) No 1061/2010 and Commission Directive 96/60/EC
+
+COMMISSION REGULATION (EU) 2019/2023 of 1 October 2019 laying down ecodesign requirements for household washing machines and household washer-dryers pursuant to Directive 2009/125/EC of the European Parliament and of the Council, amending Commission Regulation (EC) No 1275/2008 and repealing Commission Regulation (EU) No 1015/2010
+
+COMMISSION REGULATION (EU) No 801/2013 of 22 August 2013 amending Regulation (EC) No 1275/2008 with regard to ecodesign requirements for standby, off mode electric power consumption of electrical and electronic household and office equipment, and amending Regulation (EC) No 642/2009 with regard to ecodesign requirements for televisions'''
+
+Doc_Washing_Dryer_Machine_Standard = '''
+Low voltage directive 2014 / 35 / EU
+      EN 60335-1:2012 +A11:2014 +AC:2014 +A13:2017 +A1:2019 +A14:2019 +A2:2019
+      EN 60335-2-7:2010 +A1:2013 +A11:2013 +A2:2019 
+      EN 60335-2-11:2010 +A11:2012 +A1:2015 +A2:2018 
+      EN 61770:2009 +A11:2018 +A1:2019
+      EN 62233:2008 (incl. Corr.1:2008)
+EMC directive 2014 / 30 / EU
+      EN 55014-1:2021
+      EN 55014-2:2021
+      EN 61000-3-2:2019 +A1:2021
+      EN 61000-3-3:2013+A1:2019+A2:2021
+      EN 61000-4-2:2009
+      EN 61000-4-3:2006 +A1:2008 +A2:2010
+      EN 61000-4-4:2012
+      EN 61000-4-5:2014 +A1:2017
+      EN 61000-4-6:2014
+      EN 61000-4-11:2020
+Commission Delegated Directive (EU) 2015/863 amending Annex II to Rohs Directive 2011/65/EU
+
+COMMISSION DELEGATED REGULATION (EU) 2019/2014 of 11 March 2019 supplementing Regulation (EU) 2017/1369 of the European Parliament and of the Council with regard to energy labelling of household washing machines and household washer-dryers and repealing Commission Delegated Regulation (EU) No 1061/2010 and Commission Directive 96/60/EC
+
+COMMISSION REGULATION (EU) 2019/2023 of 1 October 2019 laying down ecodesign requirements for household washing machines and household washer-dryers pursuant to Directive 2009/125/EC of the European Parliament and of the Council, amending Commission Regulation (EC) No 1275/2008 and repealing Commission Regulation (EU) No 1015/2010
+
+COMMISSION REGULATION (EU) No 801/2013 of 22 August 2013 amending Regulation (EC) No 1275/2008 with regard to ecodesign requirements for standby, off mode electric power consumption of electrical and electronic household and office equipment, and amending Regulation (EC) No 642/2009 with regard to ecodesign requirements for televisions'''
+
+Doc_Date = 
+
+
+
+brand_name = input()
+customer_name = input()
+vestel_brand = input()
+customer_brand = input()
+product_code = input()
+
+
+
+
+db_path = r'C:\Users\gorkemk\Desktop\Genel\db\CMF_Machines.db' 
+engine = create_engine(f'sqlite:///{db_path}')
+
+
+query = 'SELECT * FROM excel_verileri'  
+df_veritabani = pd.read_sql(query, engine)
+
+
+excel_file_path = r'C:\Users\gorkemk\Desktop\Genel\db\Main_Specification.xlsx' 
+df_template = pd.read_excel(excel_file_path, sheet_name='DoC')  
+
+df_template.at[0, 'A'] = df_veritabani['sutun1'].iloc[0]  
+df_template.at[0, 'B'] = df_veritabani['sutun2'].iloc[0]  
+df_template.at[0, 'C'] = df_veritabani['sutun3'].iloc[0]  
+
+
+
+df_template.to_excel('updated_template.xlsx', index=False)
+
+###################################
+
+DOC_OLD VERSİON
+###################################
+
+
+import sqlite3
+import pandas as pd
+from datetime import datetime
+import openpyxl
+import functions
+import sys
+
+Doc_main_text = "here authorize {}; sell VESTEL product, with CE markings and declare that the products exported below;"
+Doc_decleration_text = "Type of product: Electronically Controlled Automatic {}"
+Doc_Reference_Number_Text = "Reference Number:doc0{}"
+Doc_Reference_Number_Masterlist ="doc0{}"
+
+Doc_Washing_Machine_Standard = '''
+Low voltage directive 2014 / 35 / EU
+       EN 60335-1:2012 +A11:2014 +AC:2014 +A13:2017 +A1:2019 +A14:2019 +A2:2019 +A15:2021
+       EN 60335-2-7:2010 +A1:2013 +A11:2013 + A2:2019
+       EN 61770:2009 +A11:2018 +A1:2019
+       EN 62233:2008 (incl. Corr.1:2008)
+EMC directive 2014 / 30 / EU 
+       EN 55014-1:2021
+       EN 55014-2:2021
+       EN 61000-3-2:2019 +A1:2021
+       EN 61000-3-3:2013+A1:2019+A2:2021
+       EN 61000-4-2:2009
+       EN 61000-4-3:2006 +A1:2008 +A2:2010
+       EN 61000-4-4:2012
+       EN 61000-4-5:2014 +A1:2017
+       EN 61000-4-6:2014
+       EN 61000-4-11:2020
+Commission Delegated Directive (EU) 2015/863 amending Annex II to Rohs Directive 2011/65/EU
+
+COMMISSION DELEGATED REGULATION (EU) 2019/2014 of 11 March 2019 supplementing Regulation (EU) 2017/1369 of the European Parliament and of the Council with regard to energy labelling of household washing machines and household washer-dryers and repealing Commission Delegated Regulation (EU) No 1061/2010 and Commission Directive 96/60/EC
+
+COMMISSION REGULATION (EU) 2019/2023 of 1 October 2019 laying down ecodesign requirements for household washing machines and household washer-dryers pursuant to Directive 2009/125/EC of the European Parliament and of the Council, amending Commission Regulation (EC) No 1275/2008 and repealing Commission Regulation (EU) No 1015/2010
+
+COMMISSION REGULATION (EU) No 801/2013 of 22 August 2013 amending Regulation (EC) No 1275/2008 with regard to ecodesign requirements for standby, off mode electric power consumption of electrical and electronic household and office equipment, and amending Regulation (EC) No 642/2009 with regard to ecodesign requirements for televisions
+'''
+
+Doc_Washing_Dryer_Machine_Standard = '''
+Low voltage directive 2014 / 35 / EU
+      EN 60335-1:2012 +A11:2014 +AC:2014 +A13:2017 +A1:2019 +A14:2019 +A2:2019
+      EN 60335-2-7:2010 +A1:2013 +A11:2013 +A2:2019 
+      EN 60335-2-11:2010 +A11:2012 +A1:2015 +A2:2018 
+      EN 61770:2009 +A11:2018 +A1:2019
+      EN 62233:2008 (incl. Corr.1:2008)
+EMC directive 2014 / 30 / EU
+      EN 55014-1:2021
+      EN 55014-2:2021
+      EN 61000-3-2:2019 +A1:2021
+      EN 61000-3-3:2013+A1:2019+A2:2021
+      EN 61000-4-2:2009
+      EN 61000-4-3:2006 +A1:2008 +A2:2010
+      EN 61000-4-4:2012
+      EN 61000-4-5:2014 +A1:2017
+      EN 61000-4-6:2014
+      EN 61000-4-11:2020s
+Commission Delegated Directive (EU) 2015/863 amending Annex II to Rohs Directive 2011/65/EU
+
+COMMISSION DELEGATED REGULATION (EU) 2019/2014 of 11 March 2019 supplementing Regulation (EU) 2017/1369 of the European Parliament and of the Council with regard to energy labelling of household washing machines and household washer-dryers and repealing Commission Delegated Regulation (EU) No 1061/2010 and Commission Directive 96/60/EC
+
+COMMISSION REGULATION (EU) 2019/2023 of 1 October 2019 laying down ecodesign requirements for household washing machines and household washer-dryers pursuant to Directive 2009/125/EC of the European Parliament and of the Council, amending Commission Regulation (EC) No 1275/2008 and repealing Commission Regulation (EU) No 1015/2010
+
+COMMISSION REGULATION (EU) No 801/2013 of 22 August 2013 amending Regulation (EC) No 1275/2008 with regard to ecodesign requirements for standby, off mode electric power consumption of electrical and electronic household and office equipment, and amending Regulation (EC) No 642/2009 with regard to ecodesign requirements for televisions
+'''
+
+
+date = datetime.now().date()
+
+product_no = input()
+
+connection = sqlite3.connect(r'C:\Users\gorkemk\Desktop\Genel\db\CMF_Machines.db')
+
+cursor = connection.cursor()
+
+cursor.execute('''select count(*) from excel_verileri where "ÜRÜN
+KODU"=?''',(product_no,)) 
+
+query_result = cursor.fetchone()
+
+results = query_result[0]
+
+
+if results == 0:
+    print("There is no match")
+    sys.exit(0)  #PyQt5 ile çıkış ayarlanacak
+
+cursor.execute('''select * from excel_verileri where "ÜRÜN
+KODU"=?''',(product_no,))                                           
+
+data = cursor.fetchall()
+
+connection.close()
+
+columns = [desc[0] for desc in cursor.description]
+data_df = pd.DataFrame(data,columns=columns)
+
+df_cursor = data_df.loc[0]
+selected_brand_name = df_cursor["MARKA"]
+selected_vestel_model = df_cursor['''VESTEL
+MODEL''']
+selected_customer_model = df_cursor['''MÜŞTERİ
+MODEL''']
+selected_energy_value = df_cursor['''ENERJİ DEĞERİ''']
+selected_CH = df_cursor["C/H"]
+selected_panel = df_cursor["PANEL"]
+selected_door = df_cursor["KAPI"]
+selected_LT = df_cursor["LT"]
+selected_RPM = df_cursor["RPM"]
+selected_customer_name = df_cursor["MÜŞTERİ"]
+selected_product = ''
+
+products_df = pd.read_excel(r'C:\Users\gorkemk\Desktop\Genel\db\Products.xlsx',sheet_name='Products')
+
+panel_list = []
+for i in range (0,products_df["PANEL TİPİ"].nunique()-1):
+    products_df_cursor = products_df.iloc[i]
+    panel_cursor = products_df_cursor["PANEL TİPİ"]
+    if panel_cursor in selected_vestel_model:
+        panel_list.append(panel_cursor)
+
+selected_product = products_df[products_df["PANEL TİPİ"] == functions.longest_string(panel_list)]
+selected_machine_type = selected_product.at[selected_product.index[0],'Ürün_Tipi']
+
+
+Decleration_Masterlist_path = r'C:\Users\gorkemk\Desktop\Genel\db\Deklarasyon_Masterlisti.xlsx'
+Decleration_Masterlist_df = pd.read_excel(Decleration_Masterlist_path,'Masterlist')
+Decleration_Masterlist_df.dropna(how='all', inplace=True)
+filtered_mastlerlist_df = Decleration_Masterlist_df[Decleration_Masterlist_df["Referans No"].str.contains('doc')]
+Decleration_Masterlist_cursor = filtered_mastlerlist_df.iloc[-1]
+current_ref_number_str = Decleration_Masterlist_cursor["Referans No"][3:]
+
+current_ref_number = int(current_ref_number_str)
+new_ref_number = current_ref_number + 1
+new_ref_number_str = str(new_ref_number)
+
+wmp = openpyxl.load_workbook(Decleration_Masterlist_path)
+masterlist_sheet = wmp.active
+last_row_masterlist = masterlist_sheet.max_row + 1
+wm = wmp['Masterlist']
+wm.cell(row=last_row_masterlist, column=1).value = Doc_Reference_Number_Masterlist.format(new_ref_number_str)
+#wm.cell(row=last_row_masterlist, column=2).value = input arayüz geldiğinde yapılacak
+wmp.save(r'C:\Users\gorkemk\Desktop\Genel\db\Deklarasyon_Masterlisti.xlsx')
+
+
+excel_file_path = r'C:\Users\gorkemk\Desktop\Genel\db\DoCTemplate.xlsx'
+wb = openpyxl.load_workbook(excel_file_path)
+ws = wb['DoC']
+
+
+ws.cell(row=51, column=2).value = date
+ws.cell(row=22, column=2).value = selected_brand_name
+ws.cell(row=22, column=6).value = selected_vestel_model
+ws.cell(row=22, column=14).value = selected_customer_model
+ws.cell(row=12, column=2).value = Doc_main_text.format(selected_customer_name)
+ws.cell(row=3, column=17).value = Doc_Reference_Number_Text.format(new_ref_number_str)
+
+if selected_machine_type == 'Washing Machine':
+    ws.cell(row=25, column=2).value = Doc_Washing_Machine_Standard
+    ws.cell(row=20, column=2).value =Doc_decleration_text.format(selected_machine_type)
+elif selected_machine_type == 'Washer Dryer':
+    ws.cell(row=25, column=2).value = Doc_Washing_Dryer_Machine_Standard
+    ws.cell(row=20, column=2).value =Doc_decleration_text.format(selected_machine_type)
+
+
+
+wb.save('test_template.xlsx')
+
+
+############################################################################
+
+DOI_Old
+################################################################################
+import pandas as pd
+import openpyxl
+import database_operations as db
+
+
+
+DoI_main_text = "Hereby declare that our below listed models produced for our customer"
+DoI_decleration_text = "Type of product: Electronically Controlled Automatic {}"
+DoI_Reference_Number_Text = "Reference Number:doi0{}"
+DoI_Reference_Number_Masterlist ="doi0{}"
+DoI_Certificate_top = "are identical to the VDE approved model listed across them."
+VDE_Certificate_Number = "VDE Certificate No:{}"
+VDE_CB_Test_Report_Number = "VDE CB Test Report No:{}"
+VDE_CB_Certificate_Number = "VDE CB Certificate No:{}"
+
+
+
+Decleration_Masterlist_path = r'C:\Users\gorkemk\Desktop\Genel\db\Deklarasyon_Masterlisti.xlsx'
+Decleration_Masterlist_df = pd.read_excel(Decleration_Masterlist_path,'Masterlist')
+Decleration_Masterlist_df.dropna(how='all', inplace=True)
+filtered_mastlerlist_df = Decleration_Masterlist_df[Decleration_Masterlist_df["Referans No"].str.contains('doi')]
+Decleration_Masterlist_cursor = filtered_mastlerlist_df.iloc[-1]
+current_ref_number_str = Decleration_Masterlist_cursor["Referans No"][3:]
+
+
+current_ref_number = int(current_ref_number_str)
+new_ref_number = current_ref_number + 1
+new_ref_number_str = str(new_ref_number)
+
+selected_VDE_certificate = db.selected_product.at[db.selected_product.index[0],'VDE Certificate No']
+print(selected_VDE_certificate)
+selected_VDE_test_report = db.selected_product.at[db.selected_product.index[0],'''VDE CB TEST REPORT
+REFERENCE NUMBER''']
+print(selected_VDE_test_report)
+selected_VDE_test_certificate = db.selected_product.at[db.selected_product.index[0],'''VDE CB CERTIFICATE
+REFERENCE NUMBER''']
+print(selected_VDE_test_certificate)
+
+
+excel_file_path = r'C:\Users\gorkemk\Desktop\Genel\db\DoITemplate.xlsx'
+wb = openpyxl.load_workbook(excel_file_path)
+ws = wb['DoI']
+
+ws.cell(row=51, column=2).value = db.date
+ws.cell(row=22, column=2).value = db.selected_brand_name
+ws.cell(row=22, column=6).value = db.selected_vestel_model
+ws.cell(row=22, column=14).value = db.selected_customer_model
+ws.cell(row=12, column=2).value = DoI_main_text
+ws.cell(row=15, column=2).value = db.selected_customer_name
+ws.cell(row=3, column=17).value = DoI_Reference_Number_Text.format(new_ref_number_str)
+ws.cell(row=25, column=2).value = DoI_Certificate_top
+ws.cell(row=26, column=2).value = VDE_Certificate_Number.format(selected_VDE_certificate)
+ws.cell(row=27, column=2).value = VDE_CB_Test_Report_Number.format(selected_VDE_test_report)
+ws.cell(row=28, column=2).value = VDE_CB_Certificate_Number.format(selected_VDE_test_certificate )
+
+if db.selected_machine_type == 'Washing Machine':
+    ws.cell(row=20, column=2).value =DoI_decleration_text.format(db.selected_machine_type)
+elif db.selected_machine_type == 'Washer Dryer':
+    ws.cell(row=20, column=2).value =DoI_decleration_text.format(db.selected_machine_type)
+
+
+wmp = openpyxl.load_workbook(Decleration_Masterlist_path)
+masterlist_sheet = wmp.active
+wm = wmp['Masterlist']
+last_row_masterlist = len(wm['A']) + 1
+wm.cell(row=last_row_masterlist, column=1).value = DoI_Reference_Number_Masterlist.format(new_ref_number_str)
+#wm.cell(row=last_row_masterlist, column=2).value = input arayüz geldiğinde yapılacak
+wmp.save(r'C:\Users\gorkemk\Desktop\Genel\db\Deklarasyon_Masterlisti.xlsx')    
+
+wb.save('test_template_doi.xlsx')
+####################################################################################
+
+
+                data.append({
+                    "TYPE"  : "Washing Machine",
+                    "BRAND NAME": brand_name[i],
+                    "MODEL NAME": model_name[i],
+                    "CAPACITY"  : capacity[i],
+                    "RPM": rpm[i],
+                    "PRICE": price[i] 
+                    })
+
+
+
+import re
+
+def remove_special_characters(text):
+    # Remove non-breaking space and thin space characters
+    cleaned_text = re.sub(r'\s|&nbsp;|&thinsp;', ' ', text)
+    return cleaned_text
+
+# Örnek metin
+sample_text = '<span>Lave-linge hublot, 5&nbsp;kg, 1 200&nbsp;tours/min</span>'
+
+# Özel karakterleri temizle
+cleaned_text = remove_special_characters(sample_text)
+
+print(cleaned_text)
