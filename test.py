@@ -53,4 +53,14 @@ def rpm_purification(input):
         return match.group(1)
 
 
-print(extract_kilograms("Lave-linge hublot 9kg 1400 trs/mn Classe A - Ffbs9469wvfr"))
+#print(extract_kilograms("Lave-linge hublot 9kg 1400 trs/mn Classe A - Ffbs9469wvfr"))
+
+x = '11kg - 13kg'.split("-")[1].replace(" ","").replace("kg","")
+
+print(x)
+
+y = [6,8]
+
+print(len(y))
+temp_name = []
+none_indices = [index for index, value in enumerate(temp_name) if value is None]
