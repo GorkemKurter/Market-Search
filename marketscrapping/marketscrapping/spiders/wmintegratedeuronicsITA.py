@@ -1,11 +1,10 @@
 import scrapy
 import sqlite3
 
-class WmeuronicsitaSpider(scrapy.Spider):
-    name = "wmeuronicsITA"
-    start_urls = ["https://www.euronics.it/elettrodomestici/grandi-elettrodomestici/lavatrici/?prefn1=tipoCarica&prefv1=Frontale"]
+class WmintegratedeuronicsitaSpider(scrapy.Spider):
+    name = "wmintegratedeuronicsITA"
+    start_urls = ["https://www.euronics.it/elettrodomestici/elettrodomestici-da-incasso/lavatrici-da-incasso/?prefn1=tipoCarica"]
     i = 0
-
     def parse(self, response):
         product_urls = response.css("#maincontent div.container.search-results.px-0 div:nth-child(4) div:nth-child(4) div div.col-sm-12.col-md-9 div.row.product-grid div:contains('product') div div.product-tile div.tile-body div.tile-hover-hidden div.pdp-link a::attr(href)").getall()
         print(product_urls)
@@ -98,3 +97,4 @@ class WmeuronicsitaSpider(scrapy.Spider):
 
         conn.commit()
         conn.close()
+
