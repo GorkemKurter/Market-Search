@@ -71,8 +71,15 @@ class WdbutfrSpider(scrapy.Spider):
         #Price Operations
         price = response.css("div.pricesActions p.pricesActions__prices span.pricesActions__prices-price::text").getall()
 
+        product_links_temp = response.css("div.product a::attr(href)").getall()
+        product_links = []
+        for i in range(len(product_links_temp)):
+            product_links.append('https://www.but.fr' + product_links_temp[i])
+
+
         #Database Operations
-        conn = sqlite3.connect('C:\\Users\\gorkemk\\Desktop\\Genel\\Market_Search\\marketscrapping\\French Market\\washerdryers_but_fr.db')
+        database_adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\\washerdryers_fr.db"
+        conn = sqlite3.connect(database_adress)
         cursor = conn.cursor()
         cursor.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="washerdryers"')
         table_exists = cursor.fetchone()
@@ -88,21 +95,47 @@ class WdbutfrSpider(scrapy.Spider):
             CAPACITY_DRY TEXT,
             RPM TEXT,
             PRICE TEXT,
-            CURRENCY TEXT 
+            CURRENCY TEXT ,
+            PRODUCT_LINK
             )
             ''')
             
         #TRY-EXCEPT
-        for i in range(len(brand_name)):
-            if (float(capacity[i]) == 6 and float(rpm[i]) == 1000) or (float(capacity[i])==6 and float(rpm[i]) == 1200) or (float(capacity[i]) == 6 and float(rpm[i]) == 1400) or (float(capacity[i]) == 7 and float(rpm[i]) == 1000) or (float(capacity[i]) == 7 and float(rpm[i]) == 1200) or (float(capacity[i]) == 7 and float(rpm[i]) == 1400) or (float(capacity[i]) == 8 and float(rpm[i]) == 1000) or (float(capacity[i]) == 8 and float(rpm[i]) == 1200) or (float(capacity[i]) == 8 and float(rpm[i]) == 1400) or (float(capacity[i]) == 8 and float(rpm[i]) == 1600) or (float(capacity[i]) == 9 and float(rpm[i]) == 1000) or (float(capacity[i]) == 9 and float(rpm[i]) == 1200) or (float(capacity[i]) == 9 and float(rpm[i]) == 1400) or (float(capacity[i]) == 10 and float(rpm[i]) == 1200) or (float(capacity[i]) == 10 and float(rpm[i]) == 1400) or (float(capacity[i])==11 and float(rpm[i]) == 1400) or (float(capacity[i])==12 and float(rpm[i]) == 1400) :
-                cursor.execute('''
-                INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY,RPM, PRICE,CURRENCY)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                ''', ("Washer_Dryer", brand_name[i], model_name[i], capacity[i],dryer_capacity[i],rpm[i], price[i],response.css('span.pricesActions__prices-price sup::text').getall()[i]))
-        
-        next_url = response.css(".category-pager--next  a::attr(href)").get()
-        if next_url is not None:
-            yield scrapy.Request(response.urljoin(next_url), callback=self.parse)
+        try:
+            for i in range(len(brand_name)):
+                if (float(capacity[i]) == 6 and float(rpm[i]) == 1000) or (float(capacity[i])==6 and float(rpm[i]) == 1200) or (float(capacity[i]) == 6 and float(rpm[i]) == 1400) or (float(capacity[i]) == 7 and float(rpm[i]) == 1000) or (float(capacity[i]) == 7 and float(rpm[i]) == 1200) or (float(capacity[i]) == 7 and float(rpm[i]) == 1400) or (float(capacity[i]) == 8 and float(rpm[i]) == 1000) or (float(capacity[i]) == 8 and float(rpm[i]) == 1200) or (float(capacity[i]) == 8 and float(rpm[i]) == 1400) or (float(capacity[i]) == 8 and float(rpm[i]) == 1600) or (float(capacity[i]) == 9 and float(rpm[i]) == 1000) or (float(capacity[i]) == 9 and float(rpm[i]) == 1200) or (float(capacity[i]) == 9 and float(rpm[i]) == 1400) or (float(capacity[i]) == 10 and float(rpm[i]) == 1200) or (float(capacity[i]) == 10 and float(rpm[i]) == 1400) or (float(capacity[i])==11 and float(rpm[i]) == 1400) or (float(capacity[i])==12 and float(rpm[i]) == 1400) :
+                    cursor.execute('''
+                    INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY,RPM, PRICE,CURRENCY,PRODUCT_LINK)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', ("Washer_Dryer", brand_name[i], model_name[i], capacity[i],dryer_capacity[i],rpm[i], price[i],response.css('span.pricesActions__prices-price sup::text').getall()[i],product_links[i]))
+
+            next_url = response.css(".category-pager--next  a::attr(href)").get()
+            if next_url is not None:
+                yield scrapy.Request(response.urljoin(next_url), callback=self.parse)
+        except:
+            pass
 
         conn.commit()
-        conn.close()        
+        conn.close()
+
+        self.remove_duplicates(database_adress)
+
+    def remove_duplicates(self, adress):
+        conn = sqlite3.connect(adress)
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute('''
+                DELETE FROM washerdryers
+                WHERE user_id NOT IN (
+                    SELECT MIN(user_id)
+                    FROM washingmachines
+                    GROUP BY BRAND_NAME, MODEL_NAME , PRODUCT_LINK
+                )
+            ''')
+        except Exception as e:
+            print(f"An error occurred while removing duplicates: {e}")
+
+        conn.commit()
+        conn.close()
+

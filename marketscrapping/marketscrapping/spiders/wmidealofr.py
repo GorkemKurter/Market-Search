@@ -1,16 +1,14 @@
 import scrapy
 import sqlite3
-import re
 
 class WmidealofrSpider(scrapy.Spider):
     name = "wmidealofr"
     start_urls = ["https://www.idealo.fr/cat/1941F1203607/lave-linge.html"]
 
     def parse(self, response):
-
         products_links = response.css("div.sr-resultItemLink a::attr(href)").getall()
         for i in products_links:
-            yield scrapy.Request(url = i ,callback = self.parse_product)
+            yield scrapy.Request(url = i ,callback = self.parse_product,meta={'product_link': i})
 
 
 
@@ -21,7 +19,9 @@ class WmidealofrSpider(scrapy.Spider):
         
 
     def parse_product(self,response):
-        
+        print(response.meta.get('product_link', ''))
+        print("***********************")
+
         try :
             brand_name_temp = response.css("h1.oopStage-title span::text").get()
             brand_name = brand_name_temp.split()[0]
@@ -29,17 +29,17 @@ class WmidealofrSpider(scrapy.Spider):
             capacity = response.css('tr.datasheet-listItem--properties td.datasheet-listItemKey:contains("Capacité") + td.datasheet-listItemValue::text').get().strip().replace('\n', '').replace('\xa0','').replace('kg','').replace(',','.')
             rpm = response.css('tr.datasheet-listItem--group:contains("Caractéristiques techniques") + tr.datasheet-listItem--properties td.datasheet-listItemKey:contains("Vitesse d\'essorage") + td.datasheet-listItemValue::text').get().strip().replace('\n', '').replace('\u202f','').replace('\xa0','').replace('tours/min','')
             price = response.css("div.oopStage-conditionButton-wrapper-text-price strong::text").get().replace("\xa0",'')[:-1]
-            currency = response.css("div.oopStage-conditionButton-wrapper-text-price strong::text").get().replace("\xa0",'')[-1] 
-
-            
+            currency = response.css("div.oopStage-conditionButton-wrapper-text-price strong::text").get().replace("\xa0",'')[-1]
+            product_link = response.meta.get('product_link', '')
 
         except Exception as e:
             print(brand_name)
             print(model_name)
             print(f"An error occurred: {e}")
         
-        #Database Operations    
-        conn = sqlite3.connect('C:\\Users\\gorke\\OneDrive\\Masaüstü\\gorkem\\marketproject\\Market-Search\\marketscrapping\\French Market\\washingmachines_idealo_fr.db')
+        #Database Operations
+        database_adress = r'C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washingmachines_fr.db'
+        conn = sqlite3.connect(database_adress)
         cursor = conn.cursor()
         cursor.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="washingmachines"')
         table_exists = cursor.fetchone()
@@ -54,7 +54,8 @@ class WmidealofrSpider(scrapy.Spider):
                 CAPACITY_kg TEXT,
                 RPM TEXT,
                 PRICE TEXT,
-                CURRENCY TEXT 
+                CURRENCY TEXT,
+                PRODUCT_LINK
                 )  
                 ''')
 
@@ -71,9 +72,9 @@ class WmidealofrSpider(scrapy.Spider):
             current_combination = (float(capacity), float(rpm))
             if current_combination in valid_combinations:
                     cursor.execute('''
-            INSERT OR IGNORE INTO washingmachines(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, CURRENCY)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            ''', ("Washing Machine", brand_name, model_name, capacity, rpm, price,currency))
+            INSERT OR IGNORE INTO washingmachines(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, CURRENCY,PRODUCT_LINK)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ''', ("Washing Machine", brand_name, model_name, capacity, rpm, price,currency,product_link))
 
         except Exception as e:
             print(brand_name)
@@ -82,3 +83,25 @@ class WmidealofrSpider(scrapy.Spider):
 
         conn.commit()
         conn.close()
+
+        self.remove_duplicates(database_adress)
+
+    def remove_duplicates(self, adress):
+        conn = sqlite3.connect(adress)
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute('''
+                DELETE FROM washingmachines
+                WHERE user_id NOT IN (
+                    SELECT MIN(user_id)
+                    FROM washingmachines
+                    GROUP BY BRAND_NAME, MODEL_NAME , PRODUCT_LINK
+                )
+            ''')
+        except Exception as e:
+            print(f"An error occurred while removing duplicates: {e}")
+
+        conn.commit()
+        conn.close()
+

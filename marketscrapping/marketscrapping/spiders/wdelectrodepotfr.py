@@ -34,8 +34,11 @@ class WdelectrodepotfrSpider(scrapy.Spider):
         capacity =[element.split(":")[-1].strip() for element in response.css(".productlist-item--description ul li:nth-child(2)::text").getall()] 
         capacity_dry_temp = response.css("div.productlist-item_infos h2.productlist-item--name::text").getall()
         capacity_dry = get_dry_capacity(capacity_dry_temp)
+        product_links = response.css("div.productlist-product a::attr(href)").getall()
+        product_links.pop(0)
 
-        conn = sqlite3.connect('C:\\Users\\gorkemk\\Desktop\\Genel\\Market_Search\\marketscrapping\\French Market\\washerdryers_electrodepot_fr.db')
+        database_adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\\washerdryers_fr.db"
+        conn = sqlite3.connect(database_adress)
         cursor = conn.cursor()
         cursor.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="washerdryers"')
         table_exists = cursor.fetchone()
@@ -51,7 +54,8 @@ class WdelectrodepotfrSpider(scrapy.Spider):
             CAPACITY_DRY TEXT,
             RPM TEXT,
             PRICE TEXT,
-            CURRENCY TEXT 
+            CURRENCY TEXT ,
+            PRODUCT_LINK
             )
             ''')
 
@@ -59,9 +63,9 @@ class WdelectrodepotfrSpider(scrapy.Spider):
         for i in range(len(brand_name)):
             if (int(capacity[i].split()[0]) == 6 and int(rpm[i]) == 1000) or (int(capacity[i].split()[0])==6 and int(rpm[i]) == 1200) or (int(capacity[i].split()[0]) == 6 and int(rpm[i]) == 1400) or (int(capacity[i].split()[0]) == 7 and int(rpm[i]) == 1000) or (int(capacity[i].split()[0]) == 7 and int(rpm[i]) == 1200) or (int(capacity[i].split()[0]) == 7 and int(rpm[i]) == 1400) or (int(capacity[i].split()[0]) == 8 and int(rpm[i]) == 1000) or (int(capacity[i].split()[0]) == 8 and int(rpm[i]) == 1200) or (int(capacity[i].split()[0]) == 8 and int(rpm[i]) == 1400) or (int(capacity[i].split()[0]) == 8 and int(rpm[i]) == 1600) or (int(capacity[i].split()[0]) == 9 and int(rpm[i]) == 1000) or (int(capacity[i].split()[0]) == 9 and int(rpm[i]) == 1200) or (int(capacity[i].split()[0]) == 9 and int(rpm[i]) == 1400) or (int(capacity[i].split()[0]) == 10 and int(rpm[i]) == 1200) or (int(capacity[i].split()[0]) == 10 and int(rpm[i]) == 1400) :
                 cursor.execute('''
-                INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY,RPM, PRICE,CURRENCY)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                ''', ("Washer_Dryer", brand_name[i], model_name[i], capacity[i],capacity_dry[i],rpm[i], price[i],response.css('.number_price sup::text').getall()[i]))
+                INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY,RPM, PRICE,CURRENCY,PRODUCT_LINK)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', ("Washer_Dryer", brand_name[i], model_name[i], capacity[i],capacity_dry[i],rpm[i], price[i],response.css('.number_price sup::text').getall()[i],product_links[i]))
         
         next_url = response.css(".category-pager--next  a::attr(href)").get()
         
@@ -69,4 +73,26 @@ class WdelectrodepotfrSpider(scrapy.Spider):
             yield scrapy.Request(response.urljoin(next_url), callback=self.parse)
 
         conn.commit()
-        conn.close()        
+        conn.close()
+
+        self.remove_duplicates(database_adress)
+
+    def remove_duplicates(self, adress):
+        conn = sqlite3.connect(adress)
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute('''
+                DELETE FROM washerdryers
+                WHERE user_id NOT IN (
+                    SELECT MIN(user_id)
+                    FROM washingmachines
+                    GROUP BY BRAND_NAME, MODEL_NAME , PRODUCT_LINK
+                )
+            ''')
+        except Exception as e:
+            print(f"An error occurred while removing duplicates: {e}")
+
+        conn.commit()
+        conn.close()
+
