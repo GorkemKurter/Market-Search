@@ -244,130 +244,153 @@ def filter_options_wd(country_selected):
     option_filter_top5.pack(anchor="center", pady=30)
     filtered_search_button.pack(anchor="center")
 
+def machine_selecting_wm(machine_option_var,adress,query):
 
-def database_opener_wm(country, machine_option_var, filter_option_var):
-    adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washingmachines_fr.db"
-    if machine_option_var == "6 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    if machine_option_var == "6 kg 1000 rpm":
         parameter = ('%6%', '1000')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "6 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "6 kg 1200 rpm":
         parameter = ('%6%', '1200')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "6 kg 1400 rpm":
         parameter = ('%6%', '1400')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "7 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "7 kg 1000 rpm":
         parameter = ('%7%', '1000')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "7 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "7 kg 1200 rpm":
         parameter = ('%7%', '1200')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "7 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "7 kg 1400 rpm":
         parameter = ('%7%', '1400')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "8 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "8 kg 1000 rpm":
         parameter = ('%8%', '1000')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "8 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "8 kg 1200 rpm":
         parameter = ('%8%', '1200')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "8 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "8 kg 1400 rpm":
         parameter = ('%8%', '1400')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "8 kg 1600 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "8 kg 1600 rpm":
         parameter = ('%8%', '1600')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "9 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "9 kg 1000 rpm":
         parameter = ('%9%', '1000')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "9 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "9 kg 1200 rpm":
         parameter = ('%9%', '1200')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "9 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "9 kg 1400 rpm":
         parameter = ('%9%', '1400')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "10 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "10 kg 1200 rpm":
         parameter = ('%10%', '1200')
         show_database_window_wm(adress, query, parameter)
 
-    elif machine_option_var == "10 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+    elif machine_option_var == "10 kg 1400 rpm":
         parameter = ('%10%', '1400')
         show_database_window_wm(adress, query, parameter)
 
-def database_opener_wd(country, machine_option_var, filter_option_var):
-    adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washerdryers_fr.db"
-    query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
-    if machine_option_var == "7&5 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
+def machine_selecting_wd(machine_option_var,adress,query):
+    if machine_option_var == "7&5 kg 1200 rpm":
         parameter = ('%7%', '%5%', '1200')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "7&5 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "7&5 kg 1400 rpm":
         parameter = ('%7%', '%5%', '1400')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "8&5 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "8&5 kg 1200 rpm":
         parameter = ('%8%', '%5%', '1200')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "8&5 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "8&5 kg 1400 rpm":
         parameter = ('%8%', '%5%', '1400')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "8&6 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "8&6 kg 1200 rpm":
         parameter = ('%8%', '%6%', '1200')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "8&6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "8&6 kg 1400 rpm":
         parameter = ('%8%', '%6%', '1400')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "9&6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "9&6 kg 1400 rpm":
         parameter = ('%9%', '%6%', '1400')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "10&6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "10&6 kg 1400 rpm":
         parameter = ('%10%', '%6%', '1400')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "10&7 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "10&7 kg 1400 rpm":
         parameter = ('%10%', '%7%', '1400')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "11&7 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "11&7 kg 1400 rpm":
         parameter = ('%11%', '%7%', '1400')
         show_database_window_wd(adress, query, parameter)
 
-    elif machine_option_var == "12&8 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
+    elif machine_option_var == "12&8 kg 1200 rpm":
         parameter = ('%12%', '%8%', '1200')
         show_database_window_wd(adress, query, parameter)
+
+
+
+def database_opener_wm(country, machine_option_var, filter_option_var):
+
+    if country == "Fransa" and filter_option_var == "Show All":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washingmachines_fr.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+        machine_selecting_wm(machine_option_var,adress,query)
+    elif country == "Fransa" and filter_option_var == "Top 5":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washingmachines_fr.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
+        machine_selecting_wm(machine_option_var, adress, query)
+
+    if country == "İngiltere" and filter_option_var == "Show All":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washingmachines_en.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
+        machine_selecting_wm(machine_option_var, adress, query)
+    elif country == "İngiltere" and filter_option_var == "Top 5":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washingmachines_en.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
+        machine_selecting_wm(machine_option_var, adress, query)
+def database_opener_wd(country, machine_option_var, filter_option_var):
+
+    if country == "Fransa" and filter_option_var == "Show All":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washerdryers_fr.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
+        machine_selecting_wd(machine_option_var,adress,query)
+    elif country == "Fransa" and filter_option_var == "Top 5":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washerdryers_fr.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
+        machine_selecting_wd(machine_option_var,adress,query)
+
+    if country == "İngiltere" and filter_option_var == "Show All":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washerdryers_en.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
+        machine_selecting_wd(machine_option_var, adress, query)
+    elif country == "İngiltere" and filter_option_var == "Top 5":
+        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washerdryers_en.db"
+        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
+        machine_selecting_wd(machine_option_var, adress, query)
 
 
 def on_country_selected(*args):
@@ -377,9 +400,9 @@ def on_country_selected(*args):
 def Main_page_on_button_click():
     selected_country = country_var.get()
     selected_machine_type = machine_var.get()
-    if selected_country == "Fransa" and selected_machine_type == "Çamaşır Makinesi":
+    if (selected_country == "Fransa" or selected_country == "İngiltere") and selected_machine_type == "Çamaşır Makinesi":
         filter_options_wm(selected_country)
-    elif selected_country == "Fransa" and selected_machine_type == "Yıkama-Kurutma Makinesi":
+    elif (selected_country == "Fransa" or selected_country == "İngiltere") and selected_machine_type == "Yıkama-Kurutma Makinesi":
         filter_options_wd(selected_country)
     else:
         messagebox.showinfo("Uyarı", "Yapım aşamasında")
