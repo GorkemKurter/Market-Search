@@ -4,7 +4,6 @@ import sqlite3
 from tkinter import messagebox
 import webbrowser
 
-
 def filter_options_wm(country_selected):
     options_window = tk.Toplevel(root)
     options_window.title("Görüntüleme seçenekleri")
@@ -247,188 +246,128 @@ def filter_options_wd(country_selected):
 
 
 def database_opener_wm(country, machine_option_var, filter_option_var):
+    adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washingmachines_fr.db"
     if machine_option_var == "6 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%6%', '1000')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "6 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%6%', '1200')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%6%', '1400')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "7 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%7%', '1000')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "7 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%7%', '1200')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "7 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%7%', '1400')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "8 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '1000')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "8 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '1200')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "8 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '1400')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "8 kg 1600 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '1600')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "9 kg 1000 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%9%', '1000')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "9 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%9%', '1200')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "9 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%9%', '1400')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "10 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%10%', '1200')
         show_database_window_wm(adress, query, parameter)
 
     elif machine_option_var == "10 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washingmachines_but_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%10%', '1400')
         show_database_window_wm(adress, query, parameter)
 
-
 def database_opener_wd(country, machine_option_var, filter_option_var):
+    adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washerdryers_fr.db"
+    query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
     if machine_option_var == "7&5 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%7%', '%5%', '1200')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "7&5 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%7%', '%5%', '1400')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "8&5 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '%5%', '1200')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "8&5 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '%5%', '1400')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "8&6 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '%6%', '1200')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "8&6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%8%', '%6%', '1400')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "9&6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%9%', '%6%', '1400')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "10&6 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%10%', '%6%', '1400')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "10&7 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%10%', '%7%', '1400')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "11&7 kg 1400 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%11%', '%7%', '1400')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
     elif machine_option_var == "12&8 kg 1200 rpm" and filter_option_var == "Show All" and country == "Fransa":
-
-        adress = r"C:\Users\gorkemk\Desktop\Genel\Market_Search\marketscrapping\French Market\washerdryers_but_fr.db"
-        query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         parameter = ('%12%', '%8%', '1200')
-        show_database_window_wm(adress, query, parameter)
+        show_database_window_wd(adress, query, parameter)
 
 
 def on_country_selected(*args):
@@ -492,7 +431,7 @@ def show_database_window_wm(adress, query, parameter):
         tree.heading(col, text=col)
         if col != "MODEL_NAME":
             tree.column(col, width=10)
-        if col == "Product_Link":
+        if col == "PRODUCT_LINK":
             tree.column(col, width=300)
             tree.bind("<Button-1>", open_link)
     for row in table_data:
@@ -631,7 +570,7 @@ def show_database_window_wd(adress, query, parameter):
         tree.heading(col, text=col)
         if col != "MODEL_NAME":
             tree.column(col, width=10)
-        if col == "Product_Link":
+        if col == "PRODUCT_LINK":
             tree.column(col, width=300)
             tree.bind("<Button-1>", open_link)
     for row in table_data:
@@ -676,18 +615,17 @@ def show_database_window_wd(adress, query, parameter):
             tree.delete(item)
 
         if min_price == "" and max_price == "":
-            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_kg LIKE ? AND RPM=? ORDER BY PRICE ASC"
-            parameter_filter = (f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", parameter[1])
+            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY, RPM, PRICE, Product_Link FROM washerdryers WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_WASH LIKE ? AND CAPACITY_DRY LIKE ? AND RPM=?  ORDER BY PRICE ASC"
+            parameter_filter = (f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", f"%{parameter[1]}", parameter[2])
         elif min_price != "" and max_price == "":
-            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_kg LIKE ? AND RPM=? AND PRICE >= ? ORDER BY PRICE ASC"
-            parameter_filter = (f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", parameter[1], min_price)
+            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY, RPM, PRICE, Product_Link FROM washerdryers WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_WASH LIKE ? AND CAPACITY_DRY LIKE ? AND RPM=? AND PRICE >= ? ORDER BY PRICE ASC"
+            parameter_filter = (f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", f"%{parameter[1]}", parameter[2], min_price)
         elif min_price == "" and max_price != "":
-            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_kg LIKE ? AND RPM=? AND PRICE <= ? ORDER BY PRICE ASC"
-            parameter_filter = (f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", parameter[1], max_price)
+            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY, RPM, PRICE, Product_Link FROM washerdryers WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_WASH LIKE ? AND CAPACITY_DRY LIKE ? AND RPM=? AND PRICE <= ? ORDER BY PRICE ASC"
+            parameter_filter = (f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", f"%{parameter[1]}", parameter[2], max_price)
         elif min_price != "" and max_price != "":
-            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_kg LIKE ? AND RPM=? AND PRICE BETWEEN ? AND ? ORDER BY PRICE ASC"
-            parameter_filter = (
-            f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", parameter[1], min_price, max_price)
+            query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY, RPM, PRICE, Product_Link FROM washerdryers WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_WASH LIKE ? AND CAPACITY_DRY LIKE ?  AND RPM=? AND PRICE BETWEEN ? AND ? ORDER BY PRICE ASC"
+            parameter_filter = (f"%{brand_name}%", f"%{model_name}%", f"%{parameter[0]}", f"%{parameter[1]}", parameter[2], min_price, max_price)
 
         # query_filter = "SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines WHERE (LOWER(BRAND_NAME) LIKE LOWER(?) OR BRAND_NAME = '') AND (LOWER(MODEL_NAME) LIKE LOWER(?) OR MODEL_NAME = '') AND CAPACITY_kg LIKE ? AND RPM=? AND PRICE BETWEEN ? AND ? ORDER BY PRICE ASC"
 
@@ -728,7 +666,6 @@ def show_database_window_wd(adress, query, parameter):
     Apply_button.pack(side="left", anchor="n", pady=15, padx=10)
     Reset_button = tk.Button(filter_frame, text="Sıfırla", font=("Helvetica", 12), command=reset_cmd)
     Reset_button.pack(side="left", anchor="n", pady=15, padx=20)
-
 
 if __name__ == "__main__":
     root = tk.Tk()

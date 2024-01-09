@@ -1,19 +1,44 @@
 import scrapy
 import sqlite3
+import json
 
 class WmidealofrSpider(scrapy.Spider):
     name = "wmidealofr"
     start_urls = ["https://www.idealo.fr/cat/1941F1203607/lave-linge.html"]
+    page_number = 1
+    item_number = 1
 
     def parse(self, response):
-        products_links = response.css("div.sr-resultItemLink a::attr(href)").getall()
+        products_links = []
+        a_links = response.css("div.sr-resultItemLink a::attr(href)").getall()
+        buttons = response.css("button.resultItemLink__button")
+
+        temp_button_list = [button.css('::attr(data-gtm-payload)').get() for button in buttons]
+        products_links_dict_list = []
+        for json_string in temp_button_list:
+            dict_value = json.loads(json_string)
+            products_links_dict_list.append(dict_value)
+        product_links_button = []
+        for product_id in products_links_dict_list:
+            product_links_button.append(f"https://www.idealo.fr/prix/{product_id.get('productId')}")
+
+
+        products_links = a_links + product_links_button
         for i in products_links:
+            self.item_number = self.item_number + 1
+            print("////////////////////////////////////////////////////////////")
+            print(self.item_number)
+            print("////////////////////////////////////////////////////////////")
             yield scrapy.Request(url = i ,callback = self.parse_product,meta={'product_link': i})
 
 
 
-        next_url = response.css('div.sr-pagination a.sr-pageArrow::attr(href)').get()
+        next_url = response.css('#productcategory > main > div.row.resultlist__content > div > div > section > div.sr-searchResult__resultPanel > div.sr-pagination > a.sr-pageArrow::attr(href)').get()
         if next_url is not None:
+            self.page_number = self.page_number + 1
+            print("############################################################")
+            print(self.page_number)
+            print("############################################################")
             yield scrapy.Request(response.urljoin(next_url), callback=self.parse)
 
         

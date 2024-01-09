@@ -1,7 +1,6 @@
 import scrapy
 import sqlite3
-import re
-
+import json
 
 class WdidealofrSpider(scrapy.Spider):
     name = "wdidealofr"
@@ -9,7 +8,19 @@ class WdidealofrSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        products_links = response.css('div.sr-resultItemLink a::attr(href)').getall()
+        a_links = response.css("div.sr-resultItemLink a::attr(href)").getall()
+        buttons = response.css("button.resultItemLink__button")
+
+        temp_button_list = [button.css('::attr(data-gtm-payload)').get() for button in buttons]
+        products_links_dict_list = []
+        for json_string in temp_button_list:
+            dict_value = json.loads(json_string)
+            products_links_dict_list.append(dict_value)
+        product_links_button = []
+        for product_id in products_links_dict_list:
+            product_links_button.append(f"https://www.idealo.fr/prix/{product_id.get('productId')}")
+
+        products_links = a_links + product_links_button
         for i in products_links:
             yield scrapy.Request(url = i ,callback = self.parse_product,meta={'product_link': i})
 
@@ -18,11 +29,8 @@ class WdidealofrSpider(scrapy.Spider):
         next_url = response.css('div.sr-pagination a.sr-pageArrow::attr(href)').get()
         if next_url is not None:
             yield scrapy.Request(response.urljoin(next_url), callback=self.parse)
-
-        
-
     def parse_product(self,response):
-        
+
         try :
             brand_name_temp = response.css("h1.oopStage-title span::text").get()
             brand_name = brand_name_temp.split()[0]
@@ -30,10 +38,10 @@ class WdidealofrSpider(scrapy.Spider):
             product_link = response.meta.get('product_link', '')
             capacity = response.css('tr.datasheet-listItem--properties td.datasheet-listItemKey:contains("Capacité de lavage") + td.datasheet-listItemValue::text').get().strip().replace('\n', '').replace('\xa0','').replace('kg','').replace(',','.')
             capacity_dry = response.css('tr.datasheet-listItem--properties td.datasheet-listItemKey:contains("Capacité de séchage") + td.datasheet-listItemValue::text').get().strip().replace('\n', '').replace('\xa0','').replace('kg','').replace(',','.')
-            if  response.css("#datasheet > div.datasheet-wrapper > table > tbody:nth-child(3) > tr.datasheet-listItem.datasheet-listItem--properties.datasheet-listItem--collapsible > td.datasheet-listItemValue.small-6.larger-8.columns").get() == None:
-                rpm = 0
-            else:    
-                rpm = response.css("#datasheet > div.datasheet-wrapper > table > tbody:nth-child(3) > tr.datasheet-listItem.datasheet-listItem--properties.datasheet-listItem--collapsible > td.datasheet-listItemValue.small-6.larger-8.columns::text").get().strip().replace('\n', '').replace('\u202f','').replace('\xa0','').replace('tours/min','')
+            if response.css('tr.datasheet-listItem--group + tr.datasheet-listItem--properties td.datasheet-listItemKey:contains("Vitesse d\'essorage") + td.datasheet-listItemValue::text').get() == None:
+                rpm = '0'
+            else:
+                rpm = response.css('tr.datasheet-listItem--group + tr.datasheet-listItem--properties td.datasheet-listItemKey:contains("Vitesse d\'essorage") + td.datasheet-listItemValue::text').get().strip().replace('\n', '').replace('\u202f','').replace('\xa0','').replace('tours/min','')
             price = response.css("div.oopStage-conditionButton-wrapper-text-price strong::text").get().replace("\xa0",'')[:-1].replace('\u202f','')
             currency = response.css("div.oopStage-conditionButton-wrapper-text-price strong::text").get().replace("\xa0",'')[-1]
 
@@ -78,8 +86,8 @@ class WdidealofrSpider(scrapy.Spider):
             current_combination = (float(capacity), float(rpm))
             if current_combination in valid_combinations:
                     cursor.execute('''
-            INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY , PRICE, CURRENCY,PRODUCT_LINK)
-            VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)
+            INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY , RPM, PRICE, CURRENCY,PRODUCT_LINK)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', ("Washer Dryer", brand_name, model_name, capacity, capacity_dry,rpm, price,currency,product_link))
 
         except Exception as e:
@@ -88,7 +96,7 @@ class WdidealofrSpider(scrapy.Spider):
             cursor.execute('''
             INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY ,RPM, PRICE, CURRENCY,PRODUCT_LINK)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', ("Washer Dryer", brand_name, model_name, capacity, capacity_dry,rpm ,price,currency,product_link))
+            ''', ("Washer Dryer", brand_name, model_name, capacity, capacity_dry, rpm, price, currency, product_link))
             print(f"An error occurred: {e}")
 
         conn.commit()
