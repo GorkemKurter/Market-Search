@@ -27,7 +27,7 @@ class WmpricespyukSpider(scrapy.Spider):
             element = WebDriverWait(driver,5).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > div > section > div:nth-child(2) > div:nth-child(2) > span')))
 
-            # Elementin metnini alın
+            
             product_name = element.text
             print(product_name)
             print("xxxxxxxxxxxxxxxxxxxxxxx")
