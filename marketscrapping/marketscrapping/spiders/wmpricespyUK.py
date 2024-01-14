@@ -24,30 +24,34 @@ class WmpricespyukSpider(scrapy.Spider):
 
     def parse_product(self, response):
         brand_name = response.css('div  section  section  div div section span  a::text').get()
+        price = response.xpath('//span[@class="Text--1acwy6y lmewLo titlesmalltext"]/text()').re_first(r'£(\d+(?:\.\d{2})?)')
+        currency = response.css('span.Text--1acwy6y.lmewLo.titlesmalltext::text').re_first(r'£')
         product_link = response.meta.get('product_link', '')
         print(brand_name)
         chrome_options = Options()
-        #chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--headless')
         chrome_options.add_argument("--ignore-certificate-error")
         chrome_options.add_argument("--ignore-ssl-errors")
         driver = webdriver.Chrome(options=chrome_options)
-        url = f"https://pricespy.co.uk{response.meta.get('product_link', '')}"
+        url = f"https://pricespy.co.uk{response.meta.get('product_link', '')}#properties"
         driver.get(url)
-        try:
-            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(9) > div:nth-child(2) > span')))
+        cookie_popup_button = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'#root-modal > div > div > div > div > div > div.StyledFooterContent--1idxbh6.cxOYpt > div > button.BaseButton--onihrq.djcpuv.primarybutton > span')))
+        cookie_popup_button.click()
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
+        try:
+
+            WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(9) > div:nth-child(2) > span')))
             model_name = driver.find_element(By.CSS_SELECTOR, '#\#properties div section section div div div.hideInViewports-sc-0-0.iwivxM div section div:nth-child(2) div:nth-child(2) span').text.split()[1]
-            print(model_name)
-            capacity = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.igwacS > section > div:nth-child(3) > div:nth-child(2) > span').text
-            print(capacity)
+            capacity = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(2) > div:nth-child(2) > span').text
             print("xxxxxxxxxxxxxxxxxxxxxxx")
             rpm = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(9) > div:nth-child(2) > span').text
+            print(model_name)
+            print("capacity:" + capacity)
             print(rpm)
-            price = driver.find_element(By.CSS_SELECTOR,'#\#statistics > div > section > section > div > div.StyledPriceHistoryArea-sc-0-0.dBNVRg > div > div.StyledFooter-sc-0-0.kybaJZ > div:nth-child(2) > div:nth-child(2) > h3').text.replace("£","")
             print(price)
-            #currency = driver.find_element(By.CSS_SELECTOR,)
-            self.i = self.i + 1
-            print(self.i)
+            #self.i = self.i + 1
+            #print(self.i)
             print("xxxxxxxxxxxxxxxxxxxxxxx")
 
         finally:
