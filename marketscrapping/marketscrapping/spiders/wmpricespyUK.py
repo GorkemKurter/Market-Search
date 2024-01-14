@@ -27,7 +27,7 @@ class WmpricespyukSpider(scrapy.Spider):
         price = response.xpath('//span[@class="Text--1acwy6y lmewLo titlesmalltext"]/text()').re_first(r'£(\d+(?:\.\d{2})?)')
         currency = response.css('span.Text--1acwy6y.lmewLo.titlesmalltext::text').re_first(r'£')
         product_link = response.meta.get('product_link', '')
-        print(brand_name)
+
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument("--ignore-certificate-error")
@@ -43,9 +43,10 @@ class WmpricespyukSpider(scrapy.Spider):
 
             WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(9) > div:nth-child(2) > span')))
             model_name = driver.find_element(By.CSS_SELECTOR, '#\#properties div section section div div div.hideInViewports-sc-0-0.iwivxM div section div:nth-child(2) div:nth-child(2) span').text.split()[1]
-            capacity = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(2) > div:nth-child(2) > span').text
+            capacity = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(2) > div:nth-child(2) > span').text.split()[0]
             print("xxxxxxxxxxxxxxxxxxxxxxx")
             rpm = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(9) > div:nth-child(2) > span').text
+            print(brand_name)
             print(model_name)
             print("capacity:" + capacity)
             print(rpm)
