@@ -1,7 +1,7 @@
+from typing import Iterable
+
 import scrapy
-
-
-
+from scrapy import Request
 
 
 class WmconforamafrSpider(scrapy.Spider):
@@ -17,7 +17,15 @@ class WmconforamafrSpider(scrapy.Spider):
             yield scrapy.Request(url = i ,callback = self.parse_product)
 
         #Next URL will come
-        
+
+    def start_requests(self):
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
+        for url in self.start_urls:
+            yield scrapy.Request(url,headers=headers,callback=self.parse)
+
+
     def parse_product(self,response):
         pass
     

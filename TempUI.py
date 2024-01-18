@@ -356,39 +356,39 @@ def machine_selecting_wd(machine_option_var,adress,query):
 def database_opener_wm(country, machine_option_var, filter_option_var):
 
     if country == "Fransa" and filter_option_var == "Show All":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washingmachines_fr.db"
+        adress = r"marketscrapping\French Market\washingmachines_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         machine_selecting_wm(machine_option_var,adress,query)
     elif country == "Fransa" and filter_option_var == "Top 5":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washingmachines_fr.db"
+        adress = r"marketscrapping\French Market\washingmachines_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
         machine_selecting_wm(machine_option_var, adress, query)
 
     if country == "İngiltere" and filter_option_var == "Show All":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washingmachines_en.db"
+        adress = r"marketscrapping\England Market\washingmachines_en.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC"
         machine_selecting_wm(machine_option_var, adress, query)
     elif country == "İngiltere" and filter_option_var == "Top 5":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washingmachines_en.db"
+        adress = r"marketscrapping\England Market\washingmachines_en.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, Product_Link FROM washingmachines where CAPACITY_kg LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
         machine_selecting_wm(machine_option_var, adress, query)
 def database_opener_wd(country, machine_option_var, filter_option_var):
 
     if country == "Fransa" and filter_option_var == "Show All":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washerdryers_fr.db"
+        adress = r"marketscrapping\French Market\washerdryers_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         machine_selecting_wd(machine_option_var,adress,query)
     elif country == "Fransa" and filter_option_var == "Top 5":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\washerdryers_fr.db"
+        adress = r"marketscrapping\French Market\washerdryers_fr.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
         machine_selecting_wd(machine_option_var,adress,query)
 
     if country == "İngiltere" and filter_option_var == "Show All":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washerdryers_en.db"
+        adress = r"marketscrapping\England Market\washerdryers_en.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC"
         machine_selecting_wd(machine_option_var, adress, query)
     elif country == "İngiltere" and filter_option_var == "Top 5":
-        adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\England Market\washerdryers_en.db"
+        adress = r"marketscrapping\England Market\washerdryers_en.db"
         query = f"SELECT BRAND_NAME, MODEL_NAME, CAPACITY_WASH, CAPACITY_DRY,RPM, PRICE, Product_Link FROM washerdryers where CAPACITY_WASH LIKE ? and CAPACITY_DRY LIKE ? and RPM=? ORDER BY PRICE ASC LIMIT 5"
         machine_selecting_wd(machine_option_var, adress, query)
 

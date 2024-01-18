@@ -11,7 +11,7 @@ class WmeuronicsitaSpider(scrapy.Spider):
         print(product_urls)
 
         for i in product_urls:
-            yield scrapy.Request(url="https://www.euronics.it/" + i, callback=self.parse_product)
+            yield scrapy.Request(url="https://www.euronics.it/" + i, callback=self.parse_product,meta = {'product_link': i})
 
         next_url = response.css('button.metanext::attr(data-url-full)').get()
         print("**************")
@@ -27,25 +27,28 @@ class WmeuronicsitaSpider(scrapy.Spider):
         rpm = response.css("#body-technicalSpecifications > div > div > div > ul:nth-child(2) > li:nth-child(1) > span.keyMapRight::text").get().replace("\n", "")
         price = response.css("div.product-cart-settings div.sticky-container div.d-flex.align-items-center p::text").get().split()[1].replace(",", ".")
         currency = response.css("div.product-cart-settings div.sticky-container div.d-flex.align-items-center p::text").get().split()[0]
+        product_link = response.meta.get('product_link', '')
 
-        conn = sqlite3.connect('C:\\Users\\gorke\\OneDrive\\Masaüstü\\gorkem\\marketproject\\Market-Search\\marketscrapping\\Italian Market\\washingmachines_euronics_ITA.db')
+        database_adress = r'Italian Market\washingmachines_ITA.db'
+        conn = sqlite3.connect(database_adress)
         cursor = conn.cursor()
         cursor.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="washingmachines"')
         table_exists = cursor.fetchone()
 
         if not table_exists:
             cursor.execute('''
-                CREATE TABLE washingmachines(
-                user_id integer primary key not null on conflict ignore,               
-                TYPE TEXT ,
-                BRAND_NAME TEXT,
-                MODEL_NAME TEXT,
-                CAPACITY_kg TEXT,
-                RPM TEXT,
-                PRICE TEXT,
-                CURRENCY TEXT 
-                )  
-            ''')
+                    CREATE TABLE washingmachines(
+                    user_id integer primary key not null on conflict ignore,               
+                    TYPE TEXT ,
+                    BRAND_NAME TEXT,
+                    MODEL_NAME TEXT,
+                    CAPACITY_kg TEXT,
+                    RPM TEXT,
+                    PRICE TEXT,
+                    CURRENCY TEXT,
+                    PRODUCT_LINK
+                    )  
+                    ''')
 
         valid_combinations = [
             (6, 1000), (6, 1200), (6, 1400),
@@ -59,9 +62,9 @@ class WmeuronicsitaSpider(scrapy.Spider):
             current_combination = (float(capacity), float(rpm))
             if current_combination in valid_combinations:
                 cursor.execute('''
-                    INSERT OR IGNORE INTO washingmachines(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, CURRENCY)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
-                ''', ("Washing Machine", brand_name, model_name, capacity, rpm, price, currency))
+                INSERT OR IGNORE INTO washingmachines(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, CURRENCY,PRODUCT_LINK)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ''', ("Washing Machine", brand_name, model_name, capacity, rpm, price, currency, product_link))
 
         except Exception as e:
             print(brand_name)
@@ -71,28 +74,21 @@ class WmeuronicsitaSpider(scrapy.Spider):
         conn.commit()
         conn.close()
 
-        # Control block
-        print("**************")
-        print(self.i)
-        print("**************")
-        self.i = self.i + 1
+        self.remove_duplicates(database_adress)
 
-        # Check for and remove duplicates
-        self.remove_duplicates()
-
-    def remove_duplicates(self):
-        conn = sqlite3.connect('C:\\Users\\gorke\\OneDrive\\Masaüstü\\gorkem\\marketproject\\Market-Search\\marketscrapping\\Italian Market\\washingmachines_euronics_ITA.db')
+    def remove_duplicates(self, adress):
+        conn = sqlite3.connect(adress)
         cursor = conn.cursor()
 
         try:
             cursor.execute('''
-                DELETE FROM washingmachines
-                WHERE user_id NOT IN (
-                    SELECT MIN(user_id)
-                    FROM washingmachines
-                    GROUP BY BRAND_NAME, MODEL_NAME
-                )
-            ''')
+                    DELETE FROM washingmachines
+                    WHERE user_id NOT IN (
+                        SELECT MIN(user_id)
+                        FROM washingmachines
+                        GROUP BY BRAND_NAME, MODEL_NAME , PRODUCT_LINK
+                    )
+                ''')
         except Exception as e:
             print(f"An error occurred while removing duplicates: {e}")
 
