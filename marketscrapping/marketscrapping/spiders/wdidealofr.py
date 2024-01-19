@@ -51,7 +51,7 @@ class WdidealofrSpider(scrapy.Spider):
             print(f"An error occurred: {e}")
         
         #Database Operations
-        database_adress = r"C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\French Market\\washerdryers_fr.db"
+        database_adress = r"French Market\washerdryers_fr.db"
         conn = sqlite3.connect(database_adress)
         cursor = conn.cursor()
         cursor.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="washerdryers"')

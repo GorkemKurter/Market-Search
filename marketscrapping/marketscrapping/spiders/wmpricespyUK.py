@@ -12,8 +12,7 @@ class WmpricespyukSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        product_links = response.css(
-            "div  section  div.Content-sc-2fu3f8-2.bugHkt  div  div  div article  a::attr(href)").getall()
+        product_links = response.css("div  section  div.Content-sc-2fu3f8-2.bugHkt  div  div  div article  a::attr(href)").getall()
         for i in product_links:
             yield scrapy.Request(url=("https://pricespy.co.uk" + i), callback=self.parse_product,meta={'product_link': i})
 
@@ -25,7 +24,7 @@ class WmpricespyukSpider(scrapy.Spider):
         brand_name = response.css('div  section  section  div div section span  a::text').get()
         price = response.xpath('//span[@class="Text--1acwy6y lmewLo titlesmalltext"]/text()').re_first(r'£(\d+(?:\.\d{2})?)')
         currency = response.css('span.Text--1acwy6y.lmewLo.titlesmalltext::text').re_first(r'£')
-        product_link = response.meta.get('product_link', '')
+        product_link = f"https://pricespy.co.uk{response.meta.get('product_link', '')}"
 
         chrome_options = Options()
         chrome_options.add_argument('--headless')
@@ -44,7 +43,7 @@ class WmpricespyukSpider(scrapy.Spider):
             model_name = driver.find_element(By.CSS_SELECTOR, '#\#properties div section section div div div.hideInViewports-sc-0-0.iwivxM div section div:nth-child(2) div:nth-child(2) span').text.split()[1]
             capacity = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(2) > div:nth-child(2) > span').text.split()[0]
             print("xxxxxxxxxxxxxxxxxxxxxxx")
-            rpm = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(9) > div:nth-child(2) > span').text
+            rpm = driver.find_element(By.CSS_SELECTOR,'#\#properties > div > section > section > div > div > div.hideInViewports-sc-0-0.iwivxM > section:nth-child(2) > div:nth-child(9) > div:nth-child(2) > span').text.split()[0]
             print(brand_name)
             print(model_name)
             print(capacity)

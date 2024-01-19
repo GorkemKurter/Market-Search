@@ -18,7 +18,6 @@ class WmidealoitaSpider(scrapy.Spider):
             yield scrapy.Request(next_url,callback=self.parse)
 
     def parse_product(self,response):
-        pass
         brand_name = response.css("#oopStage-title > span::text").get().split()[0]
         model_name = response.css("#oopStage-title > span::text").get().split()[1]
         capacity =  response.css("#datasheet > div.datasheet-wrapper > table > tbody:contains('Capacità di carico') > tr:contains('kg') > td.datasheet-listItemValue.small-6.larger-8.columns::text").get().split()[0]
