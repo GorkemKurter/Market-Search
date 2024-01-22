@@ -85,11 +85,6 @@ class WdtronyitaSpider(scrapy.Spider):
         except Exception as e:
             print(brand_name)
             print(model_name)
-            cursor.execute('''
-                INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY ,RPM, PRICE, CURRENCY,PRODUCT_LINK)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ''', (
-            "Washer Dryer", brand_name, model_name, capacity, capacity_dry, rpm, price, currency, product_link))
             print(f"An error occurred: {e}")
 
         conn.commit()
