@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import sqlite3
+import json
 
 class WmottodeSpider(scrapy.Spider):
     name = "wmottoDE"
@@ -13,14 +14,20 @@ class WmottodeSpider(scrapy.Spider):
 
     def parse(self, response):
         product_links = response.css("#reptile-tilelist > article > ul > li > a::attr(href)").getall()
+
         for i in product_links:
             yield scrapy.Request(f"https://www.otto.de{i}",callback=self.parse_product,meta={'product_link':f"https://www.otto.de{i}"})
-        next_page_selector = response.css("js_pagingLink ts-link p_btn50--1st reptile_paging__btn").get()
-        if next_page_selector is not None:
-            next_page_link = self.selenium_clicker(start_url_selector=response.url)
-            print(next_page_link)
+        try :
+            data_page = response.css("li[id='reptile-paging-bottom-next'] button::attr(data-page)").get()
+            data_page_json = json.loads(data_page)
+            next_page_url = data_page_json.get('o', '')
+            print(next_page_url)
             print("xxxxxxxxxxxxxxxxxxxxxxx")
-            yield scrapy.Request(next_page_link,callback=self.parse)
+        except:
+            pass
+
+        if next_page_url is not None :
+            yield scrapy.Request(f'https://www.otto.de/haushalt/waschmaschinen/frontlader/?l=gq&o={next_page_url}&c=Waschmaschinen',callback=self.parse)
 
     def parse_product(self,response):
 
@@ -60,20 +67,70 @@ class WmottodeSpider(scrapy.Spider):
             print(price)
             print("xxxxxxxxxxxxxxxxxxxxxxx")
             driver.quit()
+            database_adress = r'German Market\washingmachines_DE.db'
+            conn = sqlite3.connect(database_adress)
+            cursor = conn.cursor()
+            cursor.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="washingmachines"')
+            table_exists = cursor.fetchone()
 
-    def selenium_clicker(self,response,start_url_selector):
-        chrome_options = Options()
-        #chrome_options.add_argument('--headless')
-        chrome_options.add_argument("--ignore-certificate-error")
-        chrome_options.add_argument("--ignore-ssl-errors")
-        driver = webdriver.Chrome(options=chrome_options)
+            if not table_exists:
+                cursor.execute('''
+                    CREATE TABLE washingmachines(
+                    user_id integer primary key not null on conflict ignore,               
+                    TYPE TEXT ,
+                    BRAND_NAME TEXT,
+                    MODEL_NAME TEXT,
+                    CAPACITY_kg TEXT,
+                    RPM TEXT,
+                    PRICE TEXT,
+                    CURRENCY TEXT,
+                    PRODUCT_LINK
+                    )  
+                    ''')
 
-        driver.get(start_url_selector)
-        next_page_clicker = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'button.js_pagingLink.ts-link p_btn50--1st.reptile_paging__btn')))
-        next_page_clicker.click()
-        driver.quit()
-        return response.url
+            valid_combinations = [
+                (6, 1000), (6, 1200), (6, 1400),
+                (7, 1000), (7, 1200), (7, 1400),
+                (8, 1000), (8, 1200), (8, 1400), (8, 1600),
+                (9, 1000), (9, 1200), (9, 1400),
+                (10, 1200), (10, 1400)
+            ]
 
+            try:
+                current_combination = (float(capacity), float(rpm))
+                if current_combination in valid_combinations:
+                    cursor.execute('''
+                INSERT OR IGNORE INTO washingmachines(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_kg, RPM, PRICE, CURRENCY,PRODUCT_LINK)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ''', ("Washing Machine", brand_name, model_name, capacity, rpm, price, currency, product_link))
+
+            except Exception as e:
+                print(brand_name)
+                print(model_name)
+                print(f"An error occurred: {e}")
+
+            conn.commit()
+            conn.close()
+
+            self.remove_duplicates(database_adress)
+
+    def remove_duplicates(self, adress):
+        conn = sqlite3.connect(adress)
+        cursor = conn.cursor()
+        try:
+            cursor.execute('''
+                DELETE FROM washingmachines
+                WHERE user_id NOT IN (
+                    SELECT MIN(user_id)
+                    FROM washingmachines
+                    GROUP BY BRAND_NAME, MODEL_NAME , PRODUCT_LINK
+                )
+            ''')
+        except Exception as e:
+            print(f"An error occurred while removing duplicates: {e}")
+
+        conn.commit()
+        conn.close()
 
 
 

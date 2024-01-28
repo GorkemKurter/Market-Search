@@ -1,5 +1,4 @@
 import time
-
 import scrapy
 import sqlite3
 from selenium import webdriver

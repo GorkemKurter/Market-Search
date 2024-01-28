@@ -4,6 +4,9 @@ import scrapy
 class WmeldoradoruSpider(scrapy.Spider):
     name = "wmeldoradoRU"
     start_urls = ["https://www.eldorado.ru/c/stiralnye-mashiny/f/s-frontalnoy-zagruzkoy/?f_1629037=708115806"]
+    custom_settings = {
+        'USER_AGENT' : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+    }
 
     def parse(self, response):
 

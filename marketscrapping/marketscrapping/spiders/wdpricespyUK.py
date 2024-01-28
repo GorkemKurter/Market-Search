@@ -58,5 +58,74 @@ class WdpricespyukSpider(scrapy.Spider):
         finally:
             driver.quit()
 
+            database_adress = r"England Market\washerdryers_en.db"
+            conn = sqlite3.connect(database_adress)
+            cursor = conn.cursor()
+            cursor.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="washerdryers"')
+            table_exists = cursor.fetchone()
+
+            if not table_exists:
+                cursor.execute('''
+                            CREATE TABLE washerdryers(
+                            user_id integer primary key not null on conflict ignore,               
+                            TYPE TEXT ,
+                            BRAND_NAME TEXT,
+                            MODEL_NAME TEXT,
+                            CAPACITY_WASH TEXT,
+                            CAPACITY_DRY TEXT ,
+                            RPM TEXT,
+                            PRICE TEXT,
+                            CURRENCY TEXT ,
+                            PRODUCT_LINK
+                            )  
+                            ''')
+
+            valid_combinations = [
+                (6, 1000), (6, 1200), (6, 1400),
+                (7, 1000), (7, 1200), (7, 1400),
+                (8, 1000), (8, 1200), (8, 1400), (8, 1600),
+                (9, 1000), (9, 1200), (9, 1400),
+                (10, 1200), (10, 1400)
+            ]
+
+            try:
+                current_combination = (float(capacity), float(rpm))
+                if current_combination in valid_combinations:
+                    cursor.execute('''
+                        INSERT OR IGNORE INTO washerdryers(TYPE, BRAND_NAME, MODEL_NAME, CAPACITY_WASH,CAPACITY_DRY , RPM, PRICE, CURRENCY,PRODUCT_LINK)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        ''', (
+                        "Washer Dryer", brand_name, model_name, capacity, capacity_dry, rpm, price, currency,
+                        product_link))
+
+            except Exception as e:
+                print(brand_name)
+                print(model_name)
+                print(f"An error occurred: {e}")
+
+            conn.commit()
+            conn.close()
+
+            self.remove_duplicates(database_adress)
+
+        def remove_duplicates(self, adress):
+            conn = sqlite3.connect(adress)
+            cursor = conn.cursor()
+
+            try:
+                cursor.execute('''
+                            DELETE FROM washerdryers
+                            WHERE user_id NOT IN (
+                                SELECT MIN(user_id)
+                                FROM washerdryers
+                                GROUP BY BRAND_NAME, MODEL_NAME , PRODUCT_LINK
+                            )
+                        ''')
+            except Exception as e:
+                print(f"An error occurred while removing duplicates: {e}")
+
+            conn.commit()
+            conn.close()
+
 
 
