@@ -1,0 +1,48 @@
+Selenium_wmwortenESP.py::MyTestClass::test_open_page_with_seleniumbase
+--------------------------------------------------------------------
+Last Page: [WARNING! Browser Not Open!]
+ Duration: 20.17s
+  Browser: Chrome 121.0.6167.140
+   Driver: chromedriver 121.0.6167.85
+Timestamp: 1706881827  (Unix Timestamp)
+     Date: Friday, 2 February 2024
+     Time: 4:50:27 PM  (Türkiye Standart Saati, UTC+03:00)
+--------------------------------------------------------------------
+Traceback:
+  File "C:\Users\gorkemk\PycharmProjects\Market-Search\marketscrapping\marketscrapping\Selenium_Spiders\Selenium_wmwortenESP.py", line 34, in test_open_page_with_seleniumbase
+    brand_name = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+  File "C:\Users\gorkemk\PycharmProjects\Market-Search\venv\lib\site-packages\selenium\webdriver\support\wait.py", line 96, in until
+    value = method(self._driver)
+  File "C:\Users\gorkemk\PycharmProjects\Market-Search\venv\lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 84, in _predicate
+    return driver.find_element(*locator)
+  File "C:\Users\gorkemk\PycharmProjects\Market-Search\venv\lib\site-packages\seleniumbase\core\sb_driver.py", line 20, in find_element
+    return self.driver.default_find_element(by=by, value=value)
+  File "C:\Users\gorkemk\PycharmProjects\Market-Search\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 741, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "C:\Users\gorkemk\PycharmProjects\Market-Search\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\gorkemk\PycharmProjects\Market-Search\venv\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+Exception: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=121.0.6167.140)
+Stacktrace:
+	GetHandleVerifier [0x00007FF6F0FE5E42+3538674]
+	(No symbol) [0x00007FF6F0C04C02]
+	(No symbol) [0x00007FF6F0AB5AEB]
+	(No symbol) [0x00007FF6F0A9288C]
+	(No symbol) [0x00007FF6F0B25DD7]
+	(No symbol) [0x00007FF6F0B3B40F]
+	(No symbol) [0x00007FF6F0B1EE53]
+	(No symbol) [0x00007FF6F0AEF514]
+	(No symbol) [0x00007FF6F0AF0631]
+	GetHandleVerifier [0x00007FF6F1016CAD+3738973]
+	GetHandleVerifier [0x00007FF6F106C506+4089270]
+	GetHandleVerifier [0x00007FF6F1064823+4057299]
+	GetHandleVerifier [0x00007FF6F0D35C49+720121]
+	(No symbol) [0x00007FF6F0C1126F]
+	(No symbol) [0x00007FF6F0C0C304]
+	(No symbol) [0x00007FF6F0C0C432]
+	(No symbol) [0x00007FF6F0BFBD04]
+	BaseThreadInitThunk [0x00007FFB86877344+20]
+	RtlUserThreadStart [0x00007FFB875C26B1+33]

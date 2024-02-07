@@ -111,7 +111,6 @@ class WmceneoplSpider(scrapy.Spider):
             print(e)
         next_page_clicker = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR,'a.pagination__item.pagination__next')))
         next_page_clicker.click()
-        time.sleep(20)
         next_url = driver.current_url
         driver.close()
         if next_url is not None:
