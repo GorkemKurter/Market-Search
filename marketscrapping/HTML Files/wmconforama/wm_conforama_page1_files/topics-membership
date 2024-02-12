@@ -1,0 +1,30 @@
+function ignoreAsyncResult(x) { }
+
+function readResponse(r) {
+    try {
+        if (r.ok) {
+            r.blob().then(ignoreAsyncResult, ignoreAsyncResult);
+        }
+    } catch (e) { }
+}
+
+function handleTopics(result) {
+    try {
+        if (Array.isArray(result)) {
+            var topicIds = result.map(function (topic) {
+                return topic.topic;
+            });
+            if (topicIds.length > 0 || Math.random() < 0.001) {
+                fetch('https://creativecdn.com/topics-membership?ntk=zDKOuD85S7aKDZYq-oHlbIcn5mmfNSqo1NKYLpitR8hyHmQn_MBULcGqkqa6-KuAU6SO1E-mPhWGx1N5OMWUeR3HBNLMXZhHRXZHdE1p-8o&t=' + topicIds.join(','))
+                    .then(readResponse, ignoreAsyncResult);
+            }
+        }
+    } catch (e) { }
+}
+
+try {
+    if (document.browsingTopics) {
+        document.browsingTopics()
+            .then(handleTopics, ignoreAsyncResult);
+    }
+} catch (e) { }
