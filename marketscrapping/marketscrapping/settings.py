@@ -91,7 +91,7 @@ DOWNLOAD_TIMEOUT = 150
 # Set settings whose default value is deprecated to a future-proof value
 ## settings.py
 
-DOWNLOADER_MIDDLEWARES = {
+'''DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
     'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
@@ -101,10 +101,10 @@ FAKEUSERAGENT_PROVIDERS = [
     'scrapy_fake_useragent.providers.FakeUserAgentProvider',
     'scrapy_fake_useragent.providers.FakerProvider',
     'scrapy_fake_useragent.providers.FixedUserAgentProvider',
-]
-REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
-FEED_EXPORT_ENCODING = "utf-8"
+]'''
+'''REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"o
+FEED_EXPORT_ENCODING = "utf-8"'''
 ROBOTSTXT_OBEY = False
 COOKIES_ENABLED = False
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+#USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"

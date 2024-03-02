@@ -35,9 +35,7 @@ class WdottodeSpider(scrapy.Spider):
                     except:
                         pass
                     try:
-                        price = WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-                            (By.CSS_SELECTOR, 'span.js_pdp_price__retail-price__value.pl_headline300'))).text.split()[
-                            0].replace(",", ".")
+                        price = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'span.js_pdp_price__retail-price__value.pl_headline300'))).text.split()[0].replace(",", ".")
                     finally:
                         driver.quit()
                 else:

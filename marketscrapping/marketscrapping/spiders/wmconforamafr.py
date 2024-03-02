@@ -3,7 +3,7 @@ import re
 import sqlite3
 class WmconforamafrSpider(scrapy.Spider):
     name = "wmconforamafr"
-    start_urls = [r"file:///C:/Users/gorkemk/PycharmProjects/Market-Search/marketscrapping/HTML%20Files/wmconforama/page1.html"]
+    start_urls = [r"file:///C:/Users/gorkemk/PycharmProjects/Market-Search/marketscrapping/HTML%20Files/wmconforamafr/page1.html"]
     counter = 1
     page_counter = 1
 
@@ -97,7 +97,7 @@ class WmconforamafrSpider(scrapy.Spider):
                 print(e)
 
         self.page_counter += 1
-        next_url = fr"file:///C:/Users/gorkemk/PycharmProjects/Market-Search/marketscrapping/HTML%20Files/wmconforama/page{self.page_counter}.html"
+        next_url = fr"file:///C:/Users/gorkemk/PycharmProjects/Market-Search/marketscrapping/HTML%20Files/wmconforamafr/page{self.page_counter}.html"
         if next_url is not None:
             yield scrapy.Request(url=next_url,callback=self.parse)
 
