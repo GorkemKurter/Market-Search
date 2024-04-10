@@ -1,0 +1,110 @@
+//Namespace generator
+var DRLJs = (function () {
+
+    //creates nested objects based on passed namespace, creating objects for levels that do not exist - ie. "MWUtilJs.JS.UI"
+    function _namespace(nameSpaceName) {
+        var object = this;
+        var levels = nameSpaceName.split(".");
+
+        for (var i = 0, l = levels.length; i < l; i++) {
+            if (typeof object[levels[i]] == "undefined") {
+                object[levels[i]] = {};
+            }
+
+            object = object[levels[i]];
+        }
+
+        return object;
+    };
+
+    return {
+        //return this as the public method to call
+        namespace: _namespace
+    };
+} ());
+
+DRLJs.namespace("cookie");
+
+DRLJs.cookie.getCookie = function getCookie(name) {
+    var nameEQ = name + "=";
+
+    var ca = document.cookie.split(';');
+
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+
+    return null;
+};
+
+DRLJs.cookie.setCookie = function setCookie(name, value, days, domain) {
+    if (typeof days !== 'number' || days < 0) {
+        throw new Error('Invalid Argument: Days is a required argument to set a cookie!');
+    }
+    
+    if (typeof name !== 'string') {
+        throw new Error('Invalid Argument: Name must be a string to set a cookie!');
+    }
+    
+    if (typeof value === 'undefined') {
+        throw new Error('Invalid Argument: Value must be defined to set a cookie!');
+    }
+    
+    var expires = "";
+    
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+
+    var domainString = "";
+    if (domain) {
+        domainString = "; domain=" + domain;
+    }
+    
+    document.cookie = name + "=" + (value || "") + expires + "; path=/" + domainString;
+};
+
+
+//Object construction
+if (!Object.create) {
+    (function () {
+        function F() { }
+
+        //Add Create method to system type "Object"
+        Object.create = function (object) {
+            F.prototype = object;
+            return new F();
+        };
+    } ());
+}
+
+jQuery("document").ready(function () {
+    jQuery(".dynBan a[href*='.pdf']").attr("target", "_blank");
+});
+
+// moved to window instead of document in order to minimise unstyled content
+jQuery(window).ready(function () {
+    jQuery('body').addClass('gtie9');
+});
+
+$(function () {
+    if (typeof $.publish !== 'undefined') {
+        $.publish("startLiveChat");
+    }
+});
+
+if (!String.prototype.format) {
+	String.prototype.format = function () {
+		var args = arguments;
+		return this.replace(/{(\d+)}/g, function (match, number) {
+			return typeof args[number] != 'undefined'
+			  ? args[number]
+			  : match
+			;
+		});
+	};
+}

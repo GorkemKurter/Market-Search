@@ -1,0 +1,40 @@
+
+
+function sendAnalyticDataToGoogle() {      
+    setTimeout(function() {
+        var acceptButton = document.querySelector('.button-wrapper > .bottom-button');
+        if (acceptButton) {
+            acceptButton.addEventListener('click',
+                function sendGoogleAnalyticData() {
+                    var trackerName = window.googleAnalyticsTrackerName;
+                    var personalisationText = window.privacyModalPersonalisationText;
+                    var remarketingText = window.privacyModalRemarketingText;
+
+                    var personalisationElement = document.querySelector('.tagrow a[href*="' + personalisationText + '"] + .tagrow-desc + .tagrow-check span.switched');
+                    if (personalisationElement) {
+                        var personalisationSelectedOption = personalisationElement.classList.contains('off')
+                            ? false
+                            : true;
+                        var personalisationSelection = personalisationSelectedOption ? 'PersonalisationOptIn' : 'PersonalisationOptOut';
+                        ga(trackerName + '.send', 'event', 'SuppressUser', 'Personalisation', personalisationSelection, {
+                            nonInteraction: true
+                        });
+                    }
+
+                    var remarketingElement = document.querySelector('.tagrow a[href*="' + remarketingText + '"] + .tagrow-desc + .tagrow-check span.switched');
+                    if (remarketingElement) {
+                        var remarketingSelectedOption = remarketingElement.classList.contains('off')
+                            ? false
+                            : true;
+
+                        var remarketingSelection = remarketingSelectedOption ? 'RemarketingOptIn' : 'RemarketingOptOut';
+                        ga(trackerName + '.send', 'event', 'SuppressUser', 'Remarketing', remarketingSelection, {
+                            nonInteraction: true
+                        });
+                    }                                                                                
+                }
+            );
+        }
+    },
+    400);
+}

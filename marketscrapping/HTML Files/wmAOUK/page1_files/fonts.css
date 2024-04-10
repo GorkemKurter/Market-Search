@@ -1,0 +1,106 @@
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local(''), url('./inter-v2-latin-regular.woff2') format('woff2'),
+		url('./inter-v2-latin-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: local(''), url('./inter-v2-latin-700.woff2') format('woff2'),
+		url('./inter-v2-latin-700.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace-Headline';
+	font-style: normal;
+	font-display: swap;
+	src: url('./SmileyFace-Headline.woff2') format('woff2'),
+		url('./SmileyFace-Headline.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace-Headline';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('./SmileyFace-Headline.woff2') format('woff2'),
+		url('./SmileyFace-Headline.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
+	src: url('./SmileyFace-Light.woff2') format('woff2'),
+		url('./SmileyFace-Light.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: italic;
+	font-weight: 100;
+	font-display: swap;
+	src: url('./SmileyFace-LightItalic.woff2') format('woff2'),
+		url('./SmileyFace-LightItalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('./SmileyFace-Regular.woff2') format('woff2'),
+		url('./SmileyFace-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url('./SmileyFace-RegularItalic.woff2') format('woff2'),
+		url('./SmileyFace-RegularItalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('./SmileyFace-Medium.woff2') format('woff2'),
+		url('./SmileyFace-Medium.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url('./SmileyFace-MediumItalic.woff2') format('woff2'),
+		url('./SmileyFace-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('./SmileyFace-Bold.woff2') format('woff2'),
+		url('./SmileyFace-Bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'SmileyFace';
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url('./SmileyFace-BoldItalic.woff2') format('woff2'),
+		url('./SmileyFace-BoldItalic.woff') format('woff');
+}

@@ -1,0 +1,496 @@
+@font-face {
+font-family: "strata-icons";
+src: url("strata-icons.woff2") format("woff2"),
+url("strata-icons.woff") format("woff"),
+url("strata-icons.ttf") format("truetype");
+}
+
+.ico {
+-moz-osx-font-smoothing: grayscale;
+-webkit-font-smoothing: antialiased;
+font-style: normal;
+font-variant: normal;
+text-rendering: auto;
+line-height: 1;
+}
+
+.ico:not(.flex):not(.inline-flex) {
+display: inline-block;
+}
+
+.ico-xs {
+font-size: .75em;
+}
+
+.ico-sm {
+font-size: .875em;
+}
+
+
+.ico-lg {
+font-size: 1.25em;
+line-height: 0.8em;
+vertical-align: -.0625em;
+}
+
+.ico-xl {
+font-size: 1.5em;
+line-height: 0.66667em;
+vertical-align: -.075em;
+}
+
+.ico-1x {
+font-size: 1em;
+}
+
+.ico-2x {
+font-size: 2em;
+}
+
+.ico-3x {
+font-size: 3em;
+}
+
+.ico-4x {
+font-size: 4em;
+}
+
+.ico-5x {
+font-size: 5em;
+}
+
+.ico-6x {
+font-size: 6em;
+}
+
+.ico-7x {
+font-size: 7em;
+}
+
+.ico-8x {
+font-size: 8em;
+}
+
+.ico-9x {
+font-size: 9em;
+}
+
+.ico-10x {
+font-size: 10em;
+}
+
+.ico:before {
+font-family: strata-icons;
+font-style: normal;
+font-weight: normal;
+vertical-align: top;
+}
+
+.ico-10-days-to-collect:before {
+content: "\f101";
+}
+.ico-100-days-return:before {
+content: "\f102";
+}
+.ico-360-degrees:before {
+content: "\f103";
+}
+.ico-account:before {
+content: "\f104";
+}
+.ico-add-circle:before {
+content: "\f105";
+}
+.ico-add:before {
+content: "\f106";
+}
+.ico-amend-edit:before {
+content: "\f107";
+}
+.ico-ao-logo:before {
+content: "\f108";
+}
+.ico-ao-loves:before {
+content: "\f109";
+}
+.ico-ao-sorglos:before {
+content: "\f10a";
+}
+.ico-ar:before {
+content: "\f10b";
+}
+.ico-audio:before {
+content: "\f10c";
+}
+.ico-award:before {
+content: "\f10d";
+}
+.ico-bag:before {
+content: "\f10e";
+}
+.ico-basket:before {
+content: "\f10f";
+}
+.ico-bundles:before {
+content: "\f110";
+}
+.ico-buy-now-pay-later:before {
+content: "\f111";
+}
+.ico-buying-guides:before {
+content: "\f112";
+}
+.ico-calendar:before {
+content: "\f113";
+}
+.ico-call:before {
+content: "\f114";
+}
+.ico-camera:before {
+content: "\f115";
+}
+.ico-cancel:before {
+content: "\f116";
+}
+.ico-card:before {
+content: "\f117";
+}
+.ico-cashback-euro:before {
+content: "\f118";
+}
+.ico-cashback-gbp:before {
+content: "\f119";
+}
+.ico-chat:before {
+content: "\f11a";
+}
+.ico-chevron-down:before {
+content: "\f11b";
+}
+.ico-chevron-left:before {
+content: "\f11c";
+}
+.ico-chevron-right:before {
+content: "\f11d";
+}
+.ico-chevron-up:before {
+content: "\f11e";
+}
+.ico-click-and-collect:before {
+content: "\f11f";
+}
+.ico-clock:before {
+content: "\f120";
+}
+.ico-close:before {
+content: "\f121";
+}
+.ico-co2-neutral:before {
+content: "\f122";
+}
+.ico-compare:before {
+content: "\f123";
+}
+.ico-cooking:before {
+content: "\f124";
+}
+.ico-copy:before {
+content: "\f125";
+}
+.ico-credit-limit:before {
+content: "\f126";
+}
+.ico-customer-service:before {
+content: "\f127";
+}
+.ico-delivery:before {
+content: "\f128";
+}
+.ico-desktop:before {
+content: "\f129";
+}
+.ico-devices:before {
+content: "\f12a";
+}
+.ico-dishwashers:before {
+content: "\f12b";
+}
+.ico-document:before {
+content: "\f12c";
+}
+.ico-download-document:before {
+content: "\f12d";
+}
+.ico-download:before {
+content: "\f12e";
+}
+.ico-enlarge:before {
+content: "\f12f";
+}
+.ico-euro:before {
+content: "\f130";
+}
+.ico-exit:before {
+content: "\f131";
+}
+.ico-family:before {
+content: "\f132";
+}
+.ico-features-we-love:before {
+content: "\f133";
+}
+.ico-finance-euro:before {
+content: "\f134";
+}
+.ico-finance-gbp:before {
+content: "\f135";
+}
+.ico-five-star-deals:before {
+content: "\f136";
+}
+.ico-five-star-delivery:before {
+content: "\f137";
+}
+.ico-five-star-membership-large:before {
+content: "\f138";
+}
+.ico-five-star-membership:before {
+content: "\f139";
+}
+.ico-five-star-returns:before {
+content: "\f13a";
+}
+.ico-flexible-payment-euro:before {
+content: "\f13b";
+}
+.ico-flexible-payment-gbp:before {
+content: "\f13c";
+}
+.ico-fridges-and-freezers:before {
+content: "\f13d";
+}
+.ico-games:before {
+content: "\f13e";
+}
+.ico-gaming:before {
+content: "\f13f";
+}
+.ico-gbp:before {
+content: "\f140";
+}
+.ico-gift:before {
+content: "\f141";
+}
+.ico-grid:before {
+content: "\f142";
+}
+.ico-heart:before {
+content: "\f143";
+}
+.ico-hide:before {
+content: "\f144";
+}
+.ico-home:before {
+content: "\f145";
+}
+.ico-hourglass:before {
+content: "\f146";
+}
+.ico-info:before {
+content: "\f147";
+}
+.ico-installation:before {
+content: "\f148";
+}
+.ico-interest-free:before {
+content: "\f149";
+}
+.ico-keyboard:before {
+content: "\f14a";
+}
+.ico-laundry:before {
+content: "\f14b";
+}
+.ico-lightbulb:before {
+content: "\f14c";
+}
+.ico-list:before {
+content: "\f14d";
+}
+.ico-live-chat:before {
+content: "\f14e";
+}
+.ico-location:before {
+content: "\f14f";
+}
+.ico-lock:before {
+content: "\f150";
+}
+.ico-mail:before {
+content: "\f151";
+}
+.ico-manageable-payment-euro:before {
+content: "\f152";
+}
+.ico-manageable-payment-gbp:before {
+content: "\f153";
+}
+.ico-measure:before {
+content: "\f154";
+}
+.ico-menu:before {
+content: "\f155";
+}
+.ico-mic:before {
+content: "\f156";
+}
+.ico-more:before {
+content: "\f157";
+}
+.ico-movie:before {
+content: "\f158";
+}
+.ico-next-day-delivery:before {
+content: "\f159";
+}
+.ico-notification:before {
+content: "\f15a";
+}
+.ico-payback-points:before {
+content: "\f15b";
+}
+.ico-payment-options-euro:before {
+content: "\f15c";
+}
+.ico-payment-options-gbp:before {
+content: "\f15d";
+}
+.ico-picture:before {
+content: "\f15e";
+}
+.ico-play:before {
+content: "\f15f";
+}
+.ico-price-match-euro:before {
+content: "\f160";
+}
+.ico-price-match:before {
+content: "\f161";
+}
+.ico-print:before {
+content: "\f162";
+}
+.ico-product-info:before {
+content: "\f163";
+}
+.ico-promotion:before {
+content: "\f164";
+}
+.ico-protection:before {
+content: "\f165";
+}
+.ico-question-circle:before {
+content: "\f166";
+}
+.ico-rating:before {
+content: "\f167";
+}
+.ico-rechedule-delivery:before {
+content: "\f168";
+}
+.ico-recycling:before {
+content: "\f169";
+}
+.ico-refresh:before {
+content: "\f16a";
+}
+.ico-refund-euro:before {
+content: "\f16b";
+}
+.ico-refund-gbp:before {
+content: "\f16c";
+}
+.ico-returns:before {
+content: "\f16d";
+}
+.ico-reviews:before {
+content: "\f16e";
+}
+.ico-search:before {
+content: "\f16f";
+}
+.ico-secure:before {
+content: "\f170";
+}
+.ico-services:before {
+content: "\f171";
+}
+.ico-settings:before {
+content: "\f172";
+}
+.ico-share:before {
+content: "\f173";
+}
+.ico-show:before {
+content: "\f174";
+}
+.ico-small-appliances:before {
+content: "\f175";
+}
+.ico-spread-cost-euro:before {
+content: "\f176";
+}
+.ico-spread-cost-gbp:before {
+content: "\f177";
+}
+.ico-star:before {
+content: "\f178";
+}
+.ico-stop:before {
+content: "\f179";
+}
+.ico-submit:before {
+content: "\f17a";
+}
+.ico-subtract-circle:before {
+content: "\f17b";
+}
+.ico-subtract:before {
+content: "\f17c";
+}
+.ico-surround-sound:before {
+content: "\f17d";
+}
+.ico-tag:before {
+content: "\f17e";
+}
+.ico-text-message:before {
+content: "\f17f";
+}
+.ico-tick-circle:before {
+content: "\f180";
+}
+.ico-tick:before {
+content: "\f181";
+}
+.ico-track-your-order:before {
+content: "\f182";
+}
+.ico-track:before {
+content: "\f183";
+}
+.ico-trashcan:before {
+content: "\f184";
+}
+.ico-verification:before {
+content: "\f185";
+}
+.ico-warning:before {
+content: "\f186";
+}
+.ico-zoom-in:before {
+content: "\f187";
+}
+.ico-zoom-out:before {
+content: "\f188";
+}

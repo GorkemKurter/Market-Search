@@ -1,0 +1,264 @@
+function NumSel(field)
+
+{
+
+    var count = 0;
+
+    for(i = 0; i < field.length; ++i)
+
+        if(field[i].selected == true) ++count;
+
+
+
+    return count;
+
+}
+
+
+
+function FieldWithName(frm, fieldname, numofield)
+
+{
+
+    if(!numofield)
+
+        numofield = 0;
+
+    field_count = 0;
+
+    for(i = 0; i < frm.elements.length; ++i)
+
+    {
+
+        if(frm.elements[i].name == fieldname)
+
+        {
+
+            if(field_count == numofield)
+
+                return frm.elements[i];
+
+            else
+
+                field_count++;
+
+        }
+
+    }
+
+}
+
+
+
+function NumChecked(frm, fieldname)
+
+{
+
+    var count = 0;
+
+    for(i = 0; i < frm.elements.length; ++i)
+
+    {
+
+        if(frm.elements[i].name == fieldname && frm.elements[i].checked == true)
+
+            ++count;
+
+    }
+
+
+
+    return count;
+
+}
+
+
+
+function CheckLogin()
+
+{
+
+    var check = true;
+
+    var error = "";
+
+
+
+    if(document.ProfileForm.username.value == "")
+
+    {
+
+        error += error_user;
+
+        check = false;
+
+    }
+
+    if(document.ProfileForm.password.value == "")
+
+    {
+
+        error += error_pwd;
+
+        check = false;
+
+    }
+
+
+
+    if(check == false)
+
+        alert(error);
+
+
+
+    return check;
+
+}
+
+
+
+function CheckLoginEmail()
+
+{
+
+    var check = true;
+
+    var error = "";
+
+
+
+    if(document.ProfileForm.inp_3.value == "")
+
+    {
+
+        error += error_mail;
+
+        check = false;
+
+    }
+
+    if(document.ProfileForm.password.value == "")
+
+    {
+
+        error += error_pwd;
+
+        check = false;
+
+    }
+
+
+
+    if(check == false)
+
+        alert(error);
+
+
+
+    return check;
+
+}
+
+
+
+function CheckUsername()
+
+{
+
+    var check = true;
+
+
+
+    if(document.ProfileForm.username.value == "")
+
+    {
+
+        error += error_user;
+
+        check = false;
+
+    }
+
+    if(document.ProfileForm.password.value == "")
+
+    {
+
+        error += error_pwd;
+
+        check = false;
+
+    }
+
+
+
+    return check;
+
+}
+
+
+
+function CheckEmail()
+
+{
+
+    var check = true;
+
+
+
+    if(document.ProfileForm.inp_3.value == "")
+
+    {
+
+        error += error_mail;
+
+        check = false;
+
+    }
+
+    if(document.ProfileForm.password.value == "")
+
+    {
+
+        error += error_pwd;
+
+        check = false;
+
+    }
+
+
+
+    return check;
+
+}
+
+
+
+function SignUp()
+
+{
+
+    window.resizeTo(600, 600);
+
+    document.ProfileForm.a.value = "r";
+
+    document.ProfileForm.p.value = "1";
+
+    document.ProfileForm.submit();
+
+}
+
+
+
+function SubmitIt()
+
+{
+
+    if(CheckInputs() == true)
+    {
+        if(window.onbeforesubmit)
+            onbeforesubmit();
+        document.ProfileForm.submit();
+    }
+
+}

@@ -1,0 +1,993 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 187);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 187:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(189);
+
+
+/***/ }),
+
+/***/ 189:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var digitaldataproxy_esm_namespaceObject = {};
+__webpack_require__.r(digitaldataproxy_esm_namespaceObject);
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "CLICK_EVENT_NAME", function() { return CLICK_EVENT_NAME; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "DIGITAL_DATA_MUTATED", function() { return DIGITAL_DATA_MUTATED; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "FEATURES_UPDATED", function() { return FEATURES_UPDATED; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "SEND_BEACON", function() { return SEND_BEACON; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "TRACKING_EVENTS_ADDED", function() { return TRACKING_EVENTS_ADDED; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "TRACK_VIRTUAL_PAGEVIEW", function() { return TRACK_VIRTUAL_PAGEVIEW; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "VARIANTS_UPDATED", function() { return VARIANTS_UPDATED; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "VERSION", function() { return VERSION; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "appendDigitalDataEvents", function() { return appendDigitalDataEvents; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "captureGlobalEvents", function() { return captureGlobalEvents; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "digitalDataMiddleWare", function() { return digitalDataMiddleWare; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "getEventHistory", function() { return digitaldataproxy_esm_getEventHistory; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "manipulateDigitalData", function() { return manipulateDigitalData; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "sendBeacon", function() { return sendBeacon; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "trackVirtualPageview", function() { return trackVirtualPageview; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "updateFeatureFlags", function() { return updateFeatureFlags; });
+__webpack_require__.d(digitaldataproxy_esm_namespaceObject, "updateVariants", function() { return updateVariants; });
+
+// EXTERNAL MODULE: ./node_modules/deepmerge/dist/cjs.js
+var cjs = __webpack_require__(33);
+var cjs_default = /*#__PURE__*/__webpack_require__.n(cjs);
+
+// CONCATENATED MODULE: ./node_modules/@ao-internal/digital-data/dist/digitaldataproxy.esm.js
+
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+var CLICK_EVENT_NAME = 'TrackClick';
+var VALUE_SELECTION_EVENT_NAME = 'TrackValueSelection';
+var FORM_SUBMISSION_EVENT_NAME = 'TrackFormSubmission';
+var SCROLL_EVENT_NAME = 'TrackScroll';
+var INTERSECTION_EVENT_NAME = 'TrackIntersection'; //eslint-disable-next-line no-process-env, no-undef
+
+if (false) {}
+
+function getTagAttributes(el) {
+  if (!el) {
+    return [];
+  }
+
+  var consideredAttributes = ['id', 'name'];
+  var attributeNames = typeof el.getAttributeNames === 'function' ? el.getAttributeNames() : Array.from(el.attributes, function (n) {
+    return n.name;
+  });
+  return attributeNames.filter( // take all data-tag-* attributes and the considered attributes IF a matching data-tag-* does not exist
+  function (i) {
+    return i.indexOf('data-tag-') > -1 || consideredAttributes.indexOf(i) > -1 && attributeNames.indexOf("data-tag-" + i) === -1;
+  }).map(function (attribute) {
+    return {
+      name: attribute.indexOf('data-tag-') > -1 ? attribute.substr(9) : attribute,
+      value: el.getAttribute(attribute) || ''
+    };
+  });
+}
+
+function getLabelControl(element) {
+  if (element.control) {
+    return element.control;
+  } // IE doesn't return the wrapped contol element
+
+
+  return element.querySelector('input,textarea');
+}
+
+var parentOverrideAttributes = ['type'];
+function getTagContext(el) {
+  var context = {};
+
+  if (!el) {
+    return context;
+  } // image, button, text link, video
+
+
+  switch (el.tagName.toUpperCase()) {
+    case 'IMG':
+    case 'PICTURE':
+    case 'SVG':
+      context.type = 'image';
+      break;
+
+    case 'VIDEO':
+      context.type = 'video';
+      break;
+
+    case 'BUTTON':
+      context.type = 'button';
+      break;
+
+    case 'FORM':
+      context.type = 'form';
+      break;
+
+    case 'A':
+      context.type = 'link';
+      var sendLinkText = el.hasAttribute('data-send-linktext');
+
+      if (sendLinkText) {
+        var _el$textContent;
+
+        var linkText = (_el$textContent = el.textContent) == null ? void 0 : _el$textContent.trim();
+        context.linkText = linkText ? linkText : null;
+      }
+
+      break;
+
+    case 'LABEL':
+      context.type = 'label';
+      var labelInputElement = getLabelControl(el);
+
+      if (labelInputElement) {
+        if ('value' in labelInputElement) {
+          context.hasValue = labelInputElement.value ? true : false;
+        }
+
+        if (labelInputElement.id) {
+          context.labelFor = labelInputElement.id;
+        }
+      }
+
+      break;
+
+    case 'SELECT':
+      context.type = 'select';
+      var selectElement = el;
+
+      if (selectElement.selectedOptions) {
+        context.value = Array.from(selectElement.selectedOptions, function (option) {
+          return option.value;
+        });
+      } else if (selectElement.type === 'select-multiple') {
+        context.value = Array.from(selectElement.selectedOptions, function (_ref) {
+          var selected = _ref.selected,
+              value = _ref.value;
+          return {
+            selected: selected,
+            value: value
+          };
+        }).filter(function (option) {
+          return option.selected;
+        }).map(function (option) {
+          return option.value;
+        });
+      } else if (selectElement.selectedIndex > -1) {
+        context.value = [selectElement.options[selectElement.selectedIndex].value];
+      }
+
+      if (Array.isArray(context.value) && context.value.length === 1) {
+        context.value = context.value[0];
+      }
+
+      break;
+
+    case 'TEXTAREA':
+    case 'INPUT':
+      var input = el;
+
+      switch (input.type) {
+        case 'button':
+        case 'submit':
+          context.type = 'button';
+          break;
+
+        case 'image':
+          context.type = 'image';
+          break;
+
+        case 'radio':
+          context.type = 'radio';
+          context.value = input.value;
+          break;
+
+        case 'checkbox':
+          context.type = 'checkbox';
+          context.value = input.checked ? input.getAttribute('value') || true : false;
+          break;
+
+        default:
+          context.type = 'input';
+          context.private = true;
+          context.hasValue = input.value ? true : false;
+          break;
+      }
+
+      break;
+
+    default:
+      context.type = 'element';
+      break;
+  }
+
+  var candidate = el;
+
+  while (candidate && candidate !== document.documentElement) {
+    var tagAttributes = getTagAttributes(candidate);
+    tagAttributes.forEach(function (_ref2) {
+      var name = _ref2.name,
+          value = _ref2.value;
+
+      if (parentOverrideAttributes.indexOf(name) > -1 || !context.hasOwnProperty(name)) {
+        context[name] = value;
+      }
+    });
+    candidate = candidate.parentElement;
+  }
+
+  if (context.hasOwnProperty('private') && context.hasOwnProperty('value')) {
+    delete context.value;
+    context.hasValue = true;
+  }
+
+  return context;
+}
+
+function isDebugMode() {
+  return (//eslint-disable-next-line no-process-env, no-undef
+    // process.env.NODE_ENV !== 'production' &&
+    window.debugCaptureGlobalEvents === true
+  );
+}
+
+function checkContextProperties(target, context, eventName, expectedProperties) {
+  if (isDebugMode()) {
+    var warnings = [];
+    expectedProperties.forEach(function (prop) {
+      if (!context.hasOwnProperty(prop)) {
+        warnings.push(prop + ": missing in context");
+      }
+    });
+
+    if (warnings.length) {
+      //eslint-disable-next-line no-console
+      console.warn(eventName + " WARNINGS: " + target + "\n  " + warnings.join('\n  ') + "\n" + JSON.stringify(context, null, 2));
+    }
+  }
+}
+
+function dispatchContext(eventName, context) {
+  var contextKeys = Object.keys(context).filter(function (key) {
+    return key !== 'type';
+  });
+
+  if (contextKeys.length > 0) {
+    sendBeacon(eventName, context);
+
+    if (isDebugMode()) {
+      /*eslint-disable no-console */
+      console.info('\x1b[92m%s\x1b[0m', "\u2714 Tracking beacon sent! Using event name '" + eventName + "' and the following details object:\n" + JSON.stringify(context, null, 2));
+      /*eslint-enable */
+    }
+  }
+}
+
+function processClick(target, context) {
+  checkContextProperties(target, context, CLICK_EVENT_NAME, ['name', 'section']);
+  dispatchContext(CLICK_EVENT_NAME, context);
+}
+
+function processValueSelect(target, context) {
+  checkContextProperties(target, context, VALUE_SELECTION_EVENT_NAME, ['name', 'section']);
+  dispatchContext(VALUE_SELECTION_EVENT_NAME, context);
+}
+
+function processFormSubmission(target, context) {
+  checkContextProperties(target, context, FORM_SUBMISSION_EVENT_NAME, ['name', 'section']);
+  dispatchContext(FORM_SUBMISSION_EVENT_NAME, context);
+}
+
+function processScroll(context) {
+  dispatchContext(SCROLL_EVENT_NAME, context);
+}
+
+function processIntersection(target, context) {
+  checkContextProperties(target, context, INTERSECTION_EVENT_NAME, ['intersection']);
+  dispatchContext(INTERSECTION_EVENT_NAME, context);
+}
+
+var focusoutElements = /*#__PURE__*/new Set(['SELECT', 'INPUT', 'TEXTAREA']);
+var changedElements = /*#__PURE__*/new Set();
+
+function changedHandler(event) {
+  var eventTarget = event.target;
+  var tagName = eventTarget.tagName.toUpperCase();
+
+  if (focusoutElements.has(tagName)) {
+    changedElements.add(eventTarget);
+  }
+}
+
+function navigationHandler() {
+  Array.from(changedElements).forEach(function (element) {
+    var context = getTagContext(element);
+    processValueSelect(element, context);
+  });
+  changedElements.clear();
+}
+
+var scrollContext = {
+  type: 'scroll',
+  name: 'page scroll',
+  section: 'document',
+  percent: ''
+};
+var scrollPositions = {
+  moreThan25: false,
+  moreThan50: false,
+  moreThan75: false,
+  moreThan90: false
+};
+
+function scrollHandler() {
+  function getPercentageScrolled() {
+    var windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
+    var docheight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+    var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    var trackLength = docheight - windowHeight;
+    return Math.round(scrollTop / trackLength * 100);
+  }
+
+  var scrollPercent = getPercentageScrolled();
+
+  if (scrollPercent === 25 && !scrollPositions.moreThan25) {
+    scrollPositions.moreThan25 = true;
+    scrollContext = _extends({}, scrollContext, {
+      percent: '25%'
+    });
+    processScroll(scrollContext);
+  } else if (scrollPercent === 50 && !scrollPositions.moreThan50) {
+    scrollPositions.moreThan50 = true;
+    scrollContext.percent = '50%';
+    processScroll(scrollContext);
+  } else if (scrollPercent === 75 && !scrollPositions.moreThan75) {
+    scrollPositions.moreThan75 = true;
+    scrollContext.percent = '75%';
+    processScroll(scrollContext);
+  } else if (scrollPercent === 90 && !scrollPositions.moreThan90) {
+    scrollPositions.moreThan90 = true;
+    scrollContext.percent = '90%';
+    processScroll(scrollContext);
+  }
+}
+
+function globalEventHandler(event) {
+  var eventType = event.type;
+  var eventTarget = event.target;
+  var tagName = eventTarget.tagName.toUpperCase();
+  var context = getTagContext(eventTarget);
+  var isFocusoutElement = focusoutElements.has(tagName);
+  var isTargetDisabled = null;
+  if (event.type === 'focusout' && !isFocusoutElement) return;
+
+  switch (context.type) {
+    case 'label':
+      var input = getLabelControl(eventTarget);
+      var inputFromFor = context.labelFor ? document.getElementById(context.labelFor) : null;
+      var eventTargetFromLabelFor = input || inputFromFor;
+      if (!eventTargetFromLabelFor) return;
+      isTargetDisabled = eventTargetFromLabelFor.disabled;
+      if (isTargetDisabled) return;
+      var contextFromLabelFor = getTagContext(eventTargetFromLabelFor);
+      var isTargetSelectableViaLabel = contextFromLabelFor.type === 'radio' || contextFromLabelFor.type === 'checkbox';
+
+      if (isTargetSelectableViaLabel && eventType === 'click') {
+        processClick(eventTarget, context);
+      }
+
+      if (eventTargetFromLabelFor && isTargetSelectableViaLabel) {
+        changedElements.delete(eventTargetFromLabelFor);
+        processValueSelect(eventTargetFromLabelFor, contextFromLabelFor);
+      }
+
+      break;
+
+    case 'input':
+      isTargetDisabled = eventTarget.disabled;
+      if (isTargetDisabled) return;
+
+      if (eventType === 'focusout' && isFocusoutElement && changedElements.has(eventTarget) || eventType === 'click' && !isFocusoutElement) {
+        changedElements.delete(eventTarget);
+        processValueSelect(eventTarget, context);
+      }
+
+      break;
+
+    case 'form':
+      if (eventType === 'submit') {
+        processFormSubmission(eventTarget, context);
+      }
+
+      break;
+    // select, radio, checkbox
+
+    case 'select':
+    case 'radio':
+    case 'checkbox':
+      isTargetDisabled = eventTarget.disabled;
+      if (isTargetDisabled) return;
+
+      if (eventType === 'click') {
+        processClick(eventTarget, context);
+      }
+
+      if (eventType === 'focusout' && isFocusoutElement && changedElements.has(eventTarget) || eventType === 'click' && !isFocusoutElement) {
+        changedElements.delete(eventTarget);
+        processValueSelect(eventTarget, context);
+      }
+
+      break;
+
+    default:
+      processClick(eventTarget, context);
+      break;
+  }
+}
+
+if (typeof window.trackingRoots === 'undefined') {
+  window.trackingRoots = /*#__PURE__*/new Map();
+}
+
+function intersectionCallback(entries, observer) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) {
+      var element = entry.target;
+      var context = getTagContext(element);
+      processIntersection(element, context);
+      observer.unobserve(element);
+    }
+  });
+}
+function captureGlobalEvents(root, observerRoot) {
+  var roots = Array.from(window.trackingRoots);
+  var observerSelector = '[data-tag-intersection]';
+  var observerRootMargin = '-100px -50px -100px -50px';
+  var intersectionObserver;
+
+  for (var i = 0; i < roots.length; i++) {
+    var _roots$i = roots[i],
+        trackedRoot = _roots$i[0],
+        _cleanup = _roots$i[1];
+
+    if (trackedRoot.contains(root) || trackedRoot === root) {
+      return function () {};
+    }
+
+    if (root.contains(trackedRoot)) {
+      _cleanup();
+
+      window.trackingRoots.delete(root);
+    }
+  }
+
+  root.addEventListener('click', globalEventHandler); // use "focusout" for accessibility and to prevent "change" spamming
+
+  root.addEventListener('focusout', globalEventHandler);
+  root.addEventListener('change', changedHandler);
+  root.addEventListener('submit', globalEventHandler);
+  window.addEventListener('hashchange', navigationHandler);
+  window.addEventListener('pagehide', navigationHandler);
+  window.addEventListener('popstate', navigationHandler);
+  document.addEventListener('scroll', scrollHandler);
+  window.addEventListener('resize', scrollHandler);
+
+  if ('IntersectionObserver' in window) {
+    var observerElements = Array.from(document.querySelectorAll(observerSelector));
+
+    if (observerElements.length > 0) {
+      intersectionObserver = new IntersectionObserver(intersectionCallback, {
+        root: observerRoot,
+        rootMargin: observerRootMargin
+      });
+      observerElements.forEach(function (element) {
+        return intersectionObserver.observe(element);
+      });
+    }
+  }
+
+  var cleanup = function cleanup() {
+    root.removeEventListener('click', globalEventHandler);
+    root.removeEventListener('focusout', globalEventHandler);
+    root.removeEventListener('change', changedHandler);
+    root.removeEventListener('submit', globalEventHandler);
+    window.removeEventListener('hashchange', navigationHandler);
+    window.removeEventListener('pagehide', navigationHandler);
+    window.removeEventListener('popstate', navigationHandler);
+    document.removeEventListener('scroll', scrollHandler);
+    window.removeEventListener('resize', scrollHandler);
+
+    if ('IntersectionObserver' in window && typeof intersectionObserver === 'object') {
+      intersectionObserver.disconnect();
+    }
+  };
+
+  window.trackingRoots.set(root, cleanup);
+  return cleanup;
+}
+
+var eventHistory = [];
+/**
+ * Method for adding event to event history.
+ * @param {EventHistoryEntry} entry
+ */
+
+var appendEventHistory = function appendEventHistory(entry) {
+  eventHistory.push(entry);
+};
+/**
+ * Method for retrieving event history by event name.
+ * @param {String} eventName Event name
+ */
+
+var digitaldataproxy_esm_getEventHistory = function getEventHistory(eventName) {
+  var history = eventName ? eventHistory.filter(function (e) {
+    return e.eventName === eventName;
+  }) : eventHistory;
+  var historyClone = cjs_default()([], history);
+  return historyClone;
+};
+
+var CUSTOM_EVENT_QUERY_SELECTOR = 'body';
+function dispatchTrackingEvent(type, detail) {
+  var event = new CustomEvent(type, {
+    detail: detail
+  });
+  var el = document.querySelector(CUSTOM_EVENT_QUERY_SELECTOR);
+
+  if (el) {
+    el.dispatchEvent(event);
+  }
+}
+
+var _excluded = ["type", "eventName"];
+var TRACKING_EVENTS_ADDED = 'digitaldata-trackingeventsadded';
+var DIGITAL_DATA_MUTATED = 'digitaldata-digitaldatamutated';
+var FEATURES_UPDATED = 'digitaldata-featuresUpdated';
+var VARIANTS_UPDATED = 'digitaldata-variantsUpdated';
+var SEND_BEACON = 'digitaldata-sendbeacon';
+var TRACK_VIRTUAL_PAGEVIEW = 'TrackVirtualPageview';
+
+var overwriteMerge = function overwriteMerge(_destinationArray, sourceArray, _options) {
+  return sourceArray;
+};
+
+function manipulateDigitalData(payload, options) {
+  if (options === void 0) {
+    options = {
+      overwrite: false
+    };
+  }
+
+  var eventPayload = null;
+
+  if (typeof payload === 'function') {
+    payload(window.digitalData || {});
+  } else {
+    var original = window.digitalData || {};
+    var mergeOptions = {};
+
+    if (options.overwrite) {
+      mergeOptions.arrayMerge = overwriteMerge;
+    }
+
+    window.digitalData = cjs_default()(original, payload, mergeOptions);
+    eventPayload = payload;
+  }
+
+  dispatchTrackingEvent(DIGITAL_DATA_MUTATED, eventPayload);
+}
+function sendBeacon(eventName, data) {
+  if (typeof eventName === 'object') {
+    //eslint-disable-next-line no-process-env, no-undef
+    if (false) {}
+
+    data = eventName.data;
+    eventName = eventName.eventName;
+  }
+
+  try {
+    if (typeof data === 'function') {
+      data = data();
+    }
+
+    if (eventName === INTERSECTION_EVENT_NAME) {
+      appendEventHistory({
+        eventName: eventName,
+        timestamp: performance.now(),
+        detail: data
+      });
+    }
+
+    dispatchTrackingEvent(eventName, data || null);
+    dispatchTrackingEvent(SEND_BEACON, {
+      eventName: eventName
+    });
+  } catch (e) {
+    // "finally" keyword does not capture certain execptions on IE11, better to use catch
+    //this is capture any errors on the logging
+    // eslint-disable-next-line no-console
+    console.warn(e);
+  }
+}
+function trackVirtualPageview(url, title) {
+  try {
+    url = typeof url !== 'string' ? location.pathname : url;
+    title = typeof title !== 'string' ? document.title : title;
+    sendBeacon(TRACK_VIRTUAL_PAGEVIEW, {
+      url: url,
+      title: title
+    });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn(e);
+  }
+}
+function appendDigitalDataEvents(events) {
+  var eventObjects = events.map(function (_ref) {
+    var type = _ref.type,
+        eventName = _ref.eventName,
+        payload = _objectWithoutPropertiesLoose(_ref, _excluded);
+
+    return {
+      payload: payload,
+      eventName: eventName,
+      type: type
+    };
+  });
+  var digitalDataEvents = window.digitalData.event || [];
+  window.digitalData = _extends({}, window.digitalData, {
+    event: [].concat(digitalDataEvents, eventObjects)
+  });
+  dispatchTrackingEvent(TRACKING_EVENTS_ADDED, {
+    events: events
+  });
+}
+/**
+ * Method for registering application feature flags on the DigitalData object.
+ * @param {FeatureFlags} features Key value pairs of flag name to enabled state.
+ */
+
+function updateFeatureFlags(features) {
+  var original = window.digitalData || {};
+  var payload = {
+    page: {
+      pageInfo: {
+        features: features
+      }
+    }
+  };
+  window.digitalData = cjs_default()(original, payload);
+  dispatchTrackingEvent(FEATURES_UPDATED, payload);
+}
+
+var combineMergeUniqueNames = function combineMergeUniqueNames(destinationArray, sourceArray, _options) {
+  if (destinationArray === void 0) {
+    destinationArray = [];
+  }
+
+  return [].concat(destinationArray.filter(function (v) {
+    return !sourceArray.some(function (w) {
+      return w.name === v.name;
+    });
+  }), sourceArray);
+};
+/**
+ * Method for registering application AB test variants on the DigitalData object.
+ * @param variants
+ */
+
+
+function updateVariants() {
+  for (var _len = arguments.length, variants = new Array(_len), _key = 0; _key < _len; _key++) {
+    variants[_key] = arguments[_key];
+  }
+
+  var original = window.digitalData || {};
+  variants = variants.reduce(function (acc, val) {
+    return acc.concat(val);
+  }, []);
+  var payload = {
+    page: {
+      pageInfo: {
+        variants: variants
+      }
+    }
+  };
+  window.digitalData = cjs_default()(original, payload, {
+    arrayMerge: combineMergeUniqueNames
+  });
+  dispatchTrackingEvent(VARIANTS_UPDATED, payload);
+}
+
+var digitalDataMiddleWare = function digitalDataMiddleWare(sideEffect) {
+  return function (store) {
+    return function (next) {
+      return function (action) {
+        if (!sideEffect) return next(action);
+        var state = store.getState();
+        var keys = Object.keys(sideEffect);
+        keys.forEach(function (key) {
+          sideEffect[key](state, action);
+        });
+        return next(action);
+      };
+    };
+  };
+};
+
+/* istanbul ignore file */
+var VERSION = "0.6.26";
+
+
+//# sourceMappingURL=digitaldataproxy.esm.js.map
+
+// CONCATENATED MODULE: ./src/modules/digital-data-proxy/index.js
+
+window.digitalDataProxy = digitaldataproxy_esm_namespaceObject;
+
+/***/ }),
+
+/***/ 33:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isMergeableObject = function isMergeableObject(value) {
+	return isNonNullObject(value)
+		&& !isSpecial(value)
+};
+
+function isNonNullObject(value) {
+	return !!value && typeof value === 'object'
+}
+
+function isSpecial(value) {
+	var stringValue = Object.prototype.toString.call(value);
+
+	return stringValue === '[object RegExp]'
+		|| stringValue === '[object Date]'
+		|| isReactElement(value)
+}
+
+// see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
+var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
+var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
+
+function isReactElement(value) {
+	return value.$$typeof === REACT_ELEMENT_TYPE
+}
+
+function emptyTarget(val) {
+	return Array.isArray(val) ? [] : {}
+}
+
+function cloneUnlessOtherwiseSpecified(value, options) {
+	return (options.clone !== false && options.isMergeableObject(value))
+		? deepmerge(emptyTarget(value), value, options)
+		: value
+}
+
+function defaultArrayMerge(target, source, options) {
+	return target.concat(source).map(function(element) {
+		return cloneUnlessOtherwiseSpecified(element, options)
+	})
+}
+
+function getMergeFunction(key, options) {
+	if (!options.customMerge) {
+		return deepmerge
+	}
+	var customMerge = options.customMerge(key);
+	return typeof customMerge === 'function' ? customMerge : deepmerge
+}
+
+function getEnumerableOwnPropertySymbols(target) {
+	return Object.getOwnPropertySymbols
+		? Object.getOwnPropertySymbols(target).filter(function(symbol) {
+			return target.propertyIsEnumerable(symbol)
+		})
+		: []
+}
+
+function getKeys(target) {
+	return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target))
+}
+
+function propertyIsOnObject(object, property) {
+	try {
+		return property in object
+	} catch(_) {
+		return false
+	}
+}
+
+// Protects from prototype poisoning and unexpected merging up the prototype chain.
+function propertyIsUnsafe(target, key) {
+	return propertyIsOnObject(target, key) // Properties are safe to merge if they don't exist in the target yet,
+		&& !(Object.hasOwnProperty.call(target, key) // unsafe if they exist up the prototype chain,
+			&& Object.propertyIsEnumerable.call(target, key)) // and also unsafe if they're nonenumerable.
+}
+
+function mergeObject(target, source, options) {
+	var destination = {};
+	if (options.isMergeableObject(target)) {
+		getKeys(target).forEach(function(key) {
+			destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
+		});
+	}
+	getKeys(source).forEach(function(key) {
+		if (propertyIsUnsafe(target, key)) {
+			return
+		}
+
+		if (propertyIsOnObject(target, key) && options.isMergeableObject(source[key])) {
+			destination[key] = getMergeFunction(key, options)(target[key], source[key], options);
+		} else {
+			destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
+		}
+	});
+	return destination
+}
+
+function deepmerge(target, source, options) {
+	options = options || {};
+	options.arrayMerge = options.arrayMerge || defaultArrayMerge;
+	options.isMergeableObject = options.isMergeableObject || isMergeableObject;
+	// cloneUnlessOtherwiseSpecified is added to `options` so that custom arrayMerge()
+	// implementations can use it. The caller may not replace it.
+	options.cloneUnlessOtherwiseSpecified = cloneUnlessOtherwiseSpecified;
+
+	var sourceIsArray = Array.isArray(source);
+	var targetIsArray = Array.isArray(target);
+	var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+
+	if (!sourceAndTargetTypesMatch) {
+		return cloneUnlessOtherwiseSpecified(source, options)
+	} else if (sourceIsArray) {
+		return options.arrayMerge(target, source, options)
+	} else {
+		return mergeObject(target, source, options)
+	}
+}
+
+deepmerge.all = function deepmergeAll(array, options) {
+	if (!Array.isArray(array)) {
+		throw new Error('first argument should be an array')
+	}
+
+	return array.reduce(function(prev, next) {
+		return deepmerge(prev, next, options)
+	}, {})
+};
+
+var deepmerge_1 = deepmerge;
+
+module.exports = deepmerge_1;
+
+
+/***/ })
+
+/******/ });

@@ -1,0 +1,177 @@
+'use strict';
+
+var aoMigrateMessage = {
+	requiredNoViews: 1,
+	autoAcceptTime: 10000,
+	gdprBannerCookieName: 'MKT_AOCookiebannerGDPR',
+	gdprBannerCookieNameV2: 'MKT_AOCookiebannerGDPRV2',
+	cookieRequestReference: 'cookie_request_reference',
+	cookieRequestReferenceV2: 'cookie_request_reference_v2',
+    optOutMultiCookieName: 'OPTOUTMULTI',
+
+	getGdprCookie: function() {
+		return DRLJs.cookie.getCookie(aoMigrateMessage.gdprBannerCookieNameV2);
+	},
+
+    init: function () {
+        if (window.autoOptOutOfNonEssentialCookiesIfNeeded && aoMigrateMessage.is2LetterDomain() && aoMigrateMessage.browserCanCreateDomainCookies() === false) {
+            aoMigrateMessage.autoOptOutOfNonEssentialCookies();
+        }
+
+		if (aoMigrateMessage.checkCookieCreated()) {
+			if (aoMigrateMessage.displayCookieMessage()) {
+				aoMigrateMessage.animateBar(true);
+				aoMigrateMessage.setUpEvents();
+
+                if (typeof $.publish === 'undefined') {
+                    document.dispatchEvent(new CustomEvent('displayCookieMessage'));
+                } else {
+                    $.publish('displayCookieMessage');
+                }
+            }
+
+            if (typeof $.publish === 'undefined') {
+                document.dispatchEvent(new CustomEvent('displayCookieMessageChecked'));
+            } else {
+                $.publish('displayCookieMessageChecked');
+            }
+        }
+	},
+
+	is2LetterDomain: function () {
+	    return document.domain && (document.domain.indexOf('.ao.de') > -1 || document.domain.indexOf('.ao.nl') > -1);
+	},
+
+	browserCanCreateDomainCookies: function () {
+	    var cookieName = 'domainCookieCapability';
+        var cookieValue = 'passed';
+        if (DRLJs.cookie.getCookie(cookieName) !== cookieValue) {
+            DRLJs.cookie.setCookie(cookieName, cookieValue, 182, aoMigrateMessage.getDomainSuffix());
+            return (DRLJs.cookie.getCookie(cookieName) === cookieValue);
+	    }
+	    return true;
+    },
+
+	autoOptOutOfNonEssentialCookies: function () {
+	    var cookieRequestReference = 'IE1-1W7-2LD';
+	    DRLJs.cookie.setCookie(aoMigrateMessage.gdprBannerCookieName, encodeURI('accepted'), 182);
+	    DRLJs.cookie.setCookie(aoMigrateMessage.gdprBannerCookieNameV2, encodeURI('accepted'), 182);
+	    DRLJs.cookie.setCookie(aoMigrateMessage.optOutMultiCookieName, encodeURI('0:0|c7:0|c5:1|c6:1'), 182);
+	    DRLJs.cookie.setCookie(aoMigrateMessage.cookieRequestReference, cookieRequestReference, 365);
+	    DRLJs.cookie.setCookie(aoMigrateMessage.cookieRequestReferenceV2, cookieRequestReference, 365);
+	    var data = { RequestReference: cookieRequestReference };
+        window.dispatchEvent(new CustomEvent('cookiePreferencesChanged', { detail: data }));
+	},
+
+	checkCookieCreated: function () {
+	    var cookie = this.getGdprCookie();
+	    if (!cookie) {
+	        aoMigrateMessage.saveToCookie(0);
+	    }
+	    return true;
+	},
+
+	increaseNumHits: function() {
+	    var cookieValue = this.getGdprCookie();
+
+		if (cookieValue !== 'accepted') {
+			aoMigrateMessage.saveToCookie(++cookieValue);
+		}
+	},
+
+	saveToCookie: function (value) {
+		DRLJs.cookie.setCookie(aoMigrateMessage.gdprBannerCookieNameV2, value, 182, aoMigrateMessage.getDomainSuffix());
+		// IE11, try to read the cookie right after setting it, if we can't read it, then set it again without any domain
+		if (this.getGdprCookie() !== value.toString()) {
+			DRLJs.cookie.setCookie(aoMigrateMessage.gdprBannerCookieNameV2, value, 182);
+		}
+	},
+	displayCookieMessage: function () {
+		var isKioskUser = navigator.userAgent.toLowerCase().indexOf('aokiosk') > -1;
+
+		var legacyCookieBannerEnabled = document.body.dataset.prefix === "AOL" || window.AO.FeatureSwitches.LegacyCookieBannerEnabled;
+		if (!legacyCookieBannerEnabled || isKioskUser) {
+            return false;
+		}
+
+	    var cookieValue = this.getGdprCookie();
+
+        var showCookieBannerTest = false;
+		var cookieBannerTestValue = DRLJs.cookie.getCookie('AOLCookieBannerTestVariant');
+
+        if (cookieBannerTestValue) {
+			showCookieBannerTest = cookieBannerTestValue.indexOf('in-traffic-split-variant') > -1;
+        }
+
+		return cookieValue < aoMigrateMessage.requiredNoViews
+			&& cookieValue !== 'accepted'
+            && showCookieBannerTest === false;
+	},
+
+	setUpEvents: function(){
+		$('#acceptMessage').click(function() {
+			aoMigrateMessage.saveToCookie('accepted');
+            aoMigrateMessage.increaseNumHits();
+
+            $('#holder').css('margin-top', '10px');
+
+            aoMigrateMessage.animateBar();
+
+            aoMigrateMessage.logAcceptAll();
+		});
+	},
+
+	animateBar: function(direction){
+		var height = direction ? 220 : 0;
+
+		$('#holder').css('margin-top', '0');
+
+		$('#aoMessageHolder').animate({
+			'max-height': height + 'px'
+		}, 500);
+
+		$('#acceptMessage, #aoMessageHolder p').show();
+
+		$('#dynamicBasketSpinner').animate({
+			top: '50px'
+		}, 500);
+	},
+	
+	logAcceptAll: function () {
+
+		// Log accept all to Single Customer Review and set approriate cookies
+        $.ajax({
+            type: 'POST',
+            url: window.AO.Configs.HomepageUrl + '/webapi/gdpr/CookiePreferences',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify({
+                acceptAll: true
+            }),
+            success: function success(data) {
+				DRLJs.cookie.setCookie(aoMigrateMessage.cookieRequestReferenceV2, data.RequestReference, 365, aoMigrateMessage.getDomainSuffix());
+				// IE11, try to read the cookie right after setting it, if we can't read it, then set it again without any domain
+				if (DRLJs.cookie.getCookie(aoMigrateMessage.cookieRequestReferenceV2) !== data.RequestReference) {
+					DRLJs.cookie.setCookie(aoMigrateMessage.cookieRequestReferenceV2, data.RequestReference, 365);
+				}
+
+                window.dispatchEvent(new CustomEvent('cookiePreferencesChanged', { detail: data }));
+            },
+			error: function error(xhr, textStatus, error) {
+				console.error('Failed to audit cookie preferences: ' + error);
+			}
+        });
+	},
+
+	getDomainSuffix: function () {
+	    var domain = document.domain.split('.');
+	    if (domain.length > 2)
+	        domain = domain.slice(1);
+	    var domainSuffix = '.' + domain.join('.');
+	    return domainSuffix;
+	}
+};
+
+$(window).load(function(){
+	aoMigrateMessage.init();
+});

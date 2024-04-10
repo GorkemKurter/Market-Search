@@ -1,0 +1,330 @@
+/* eslint consistent-this: ["error", "self"] */
+
+AoBrightcovePlayer =
+  window.AoBrightcovePlayer ||
+  (function (window) {
+    // eslint-disable-line no-undef
+
+    function aoBrightcovePlayer(options) {
+      options = options || {};
+
+      this.options = Object.assign({}, this.defaults(), options);
+
+      this.accountId = this.options.accountId;
+      this.bcPlayerId = window.bcPlayerId || this.options.bcPlayerId;
+    }
+
+    function generateUuid() {
+      /* eslint-disable no-bitwise */
+      var d = new Date().getTime();
+      var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+        /[xy]/g,
+        function (c) {
+          var r = (d + Math.random() * 16) % 16 | 0;
+          d = Math.floor(d / 16);
+          return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+        }
+      );
+      return uuid;
+      /* eslint-enable no-bitwise */
+    }
+
+    function fireEvent(event) {
+      return function () {
+        var e = document.createEvent("Event");
+        e.initEvent(event, true, true);
+        window.dispatchEvent(e);
+      };
+    }
+
+    aoBrightcovePlayer.prototype.defaults = function () {
+      return {
+        accountId: "710857100001",
+        bcPlayerId: "14b6dfb4-3383-4028-822e-6a0200ec89ad",
+      };
+    };
+
+    aoBrightcovePlayer.prototype.addPlayer = function (
+      container,
+      playerOptions
+    ) {
+      // player can be added with videoId which will initialise the video and begin
+      // downloading immediately. Alternatively the player can be initialised without
+      // a videoId and this can be added using the loadVideo method
+
+      if (!playerOptions.videoId) {
+        if (typeof container == "string") {
+          playerOptions.videoId = document
+            .querySelector(container)
+            .getAttribute("data-video");
+        } else {
+          playerOptions.videoId = container.getAttribute("data-video");
+        }
+      }
+      if (typeof playerOptions.playerId === "undefined") {
+        playerOptions.playerId = generateUuid();
+      }
+      if (typeof playerOptions.classNames === "undefined") {
+        playerOptions.classNames = "genericVideoDefaultState video-js";
+      }
+      if (typeof playerOptions.autoPlay === "undefined") {
+        playerOptions.autoPlay = false;
+      }
+      if (
+        typeof playerOptions.poster === "undefined" ||
+        playerOptions.poster === "undefined"
+      ) {
+        playerOptions.poster = "";
+      }
+
+      var playerHtml =
+        '<video id="' +
+        playerOptions.playerId +
+        '"' +
+        (playerOptions.videoId
+          ? ' data-video-id="' + playerOptions.videoId + '"'
+          : "") +
+        (playerOptions.poster ? ' poster="' + playerOptions.poster + '"' : "") +
+        (playerOptions.autoPlay
+          ? ' data-autoplay="' + playerOptions.autoPlay + '"'
+          : "") +
+        ' data-account="' +
+        this.accountId +
+        '"' +
+        ' data-player="' +
+        this.bcPlayerId +
+        '"' +
+        ' class="' +
+        playerOptions.classNames +
+        '"' +
+        ' data-embed="default"' +
+        ' data-title="' +
+        playerOptions.title +
+        '"' +
+        " controls>" +
+        "</video>";
+
+      container.innerHTML += playerHtml;
+    };
+
+    aoBrightcovePlayer.prototype.addVideoTitle = function (playerId, title) {
+      window.addEventListener("brightcoveScriptsLoaded", function () {
+        var playerElem = document.getElementById(playerId);
+
+        var videoTitle = document.createElement("span");
+        videoTitle.setAttribute(
+          "class",
+          "vjs-title bg-transparent text-body-sm font-bold text-white pointer-events-none p-0 top-auto bottom-0 mb-10 lg:mb-12 xl:mb-16"
+        );
+        videoTitle.innerHTML = title;
+        playerElem.appendChild(videoTitle);
+      });
+    };
+
+    aoBrightcovePlayer.prototype.loadVideo = function (playerId, videoId) {
+      var self = this;
+
+      var player = self.getPlayer(playerId);
+      player.on("loadstart", fireEvent("brightcoveVideoLoaded"));
+
+      if (player && player.mediainfo) {
+        // ignore if videoId is already loaded into player and jut play instead
+        if (player.mediainfo.id === videoId) {
+          self.playVideo(playerId);
+          return;
+        }
+      }
+
+      player.catalog.getVideo(videoId, function (error, video) {
+        player.catalog.load(video);
+        self.playVideo(playerId);
+      });
+    };
+
+    aoBrightcovePlayer.prototype.playVideo = function (playerId) {
+      var self = this;
+
+      var player = this.getPlayer(playerId);
+
+      player.on("play", function () {
+        self.pauseAllVideos(this.id());
+      });
+
+      if (player) {
+        if (player.readyState() > 0) {
+          player.play();
+        } else {
+          player.on("loadedmetadata", function () {
+            player.play();
+          });
+        }
+      }
+    };
+
+    aoBrightcovePlayer.prototype.pauseVideo = function (playerId) {
+      var self = this;
+
+      var player = self.getPlayer(playerId);
+      if (player) {
+        player.pause();
+      }
+    };
+
+    aoBrightcovePlayer.prototype.pauseAllVideos = function (currentPlayerId) {
+      if (!window.videojs) {
+        return;
+      }
+
+      var players = window.videojs.getPlayers();
+      for (var key in players) {
+        if (
+          key !== currentPlayerId &&
+          players.hasOwnProperty(key) &&
+          players[key] &&
+          !players[key].el().getAttribute("data-nopause")
+        ) {
+          players[key].pause();
+        }
+      }
+    };
+
+    aoBrightcovePlayer.prototype.addPoster = function (playerId, poster) {
+      var self = this;
+
+      var player = self.getPlayer(playerId);
+      if (player) {
+        player.poster(poster);
+      }
+    };
+
+    aoBrightcovePlayer.prototype.getPlayer = function (playerId) {
+      if (!window.videojs) {
+        return null;
+      }
+      return window.videojs.getPlayers()[playerId];
+    };
+
+    function onLoadStartfunction() {
+      var name = this.mediainfo.name;
+      var poster = this.mediainfo.poster;
+      var playerElement = this.el();
+      var videoElement = playerElement.querySelector("video");
+      if (poster) {
+        videoElement.setAttribute("poster", poster);
+      }
+      if (name) {
+        videoElement.setAttribute("title", name);
+      } else {
+        videoElement.removeAttribute("title");
+      }
+    }
+
+    aoBrightcovePlayer.prototype.init = function () {
+      if (typeof window.bc == "undefined") {
+        var scriptUrl =
+          "//players.brightcove.net/" +
+          this.accountId +
+          "/" +
+          this.bcPlayerId +
+          "_default/index.min.js"; //eslint-disable-line max-len
+        if (!document.querySelector('script[src="' + scriptUrl + '"]')) {
+          var s = document.createElement("script");
+          s.src = scriptUrl;
+          s.addEventListener("load", function () {
+            var players = window.videojs.getPlayers();
+            for (var key in players) {
+              if (players.hasOwnProperty(key)) {
+                players[key].on("loadstart", onLoadStartfunction);
+              }
+            }
+
+            fireEvent("brightcoveScriptsLoaded")();
+          });
+          document.body.appendChild(s);
+        }
+      } else {
+        var bcPlayerId = this.bcPlayerId;
+        var techTestExp = /(?:^|\s)vjs-tech(?:\s|$)/;
+        var selector =
+          'video[data-player="' + bcPlayerId + '"][data-embed="default"]'; //'video';
+        var videoList = document.querySelectorAll(selector);
+        var players = window.videojs.getPlayers();
+        var prevPlayers = {};
+        var key;
+        for (key in players) {
+          if (players.hasOwnProperty(key)) {
+            prevPlayers[key] = true;
+          }
+        }
+
+        Array.prototype.forEach.call(videoList, function (v) {
+          //  if (v.getAttribute('data-player') === bcPlayerId && v.getAttribute('data-embed') === 'default' && !techTestExp.test(v.className)) {
+          if (!techTestExp.test(v.className)) {
+            window.bc(v);
+          }
+        });
+        players = window.videojs.getPlayers();
+        for (key in players) {
+          if (!prevPlayers.hasOwnProperty(key) && players.hasOwnProperty(key)) {
+            players[key].on("loadstart", onLoadStartfunction);
+          }
+        }
+        fireEvent("brightcoveScriptsLoaded")();
+      }
+    };
+
+    aoBrightcovePlayer.prototype.dispose = function (playerId) {
+      var self = this;
+
+      var player = self.getPlayer(playerId);
+
+      if (!player) {
+        return;
+      }
+
+      var el = player.el();
+      try {
+        el.style.display = "none";
+        player.dispose();
+      } catch (e) {
+        el.parentNode.removeChild(el);
+      }
+    };
+
+    aoBrightcovePlayer.prototype.initialisePageVideos = function (
+      container,
+      selector
+    ) {
+      var self = this;
+
+      if (typeof selector !== "string") {
+        selector = "[data-video]";
+      }
+
+      var videos = container.querySelectorAll(selector);
+
+      for (var i = 0; i < videos.length; i++) {
+        var videoId = videos[i].getAttribute(selector);
+
+        self.addPlayer(videos[i], {
+          videoId: videoId,
+        });
+      }
+
+      window.addEventListener("brightcoveScriptsLoaded", function () {
+        var players = window.videojs.getPlayers();
+
+        for (var key in players) {
+          if (players.hasOwnProperty(key) && players[key]) {
+            players[key].on("play", function () {
+              self.pauseAllVideos(this.id());
+            });
+          }
+        }
+      });
+
+      self.init();
+    };
+
+    return aoBrightcovePlayer;
+  })(window);
